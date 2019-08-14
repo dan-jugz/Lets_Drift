@@ -3,8 +3,8 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm
-from ..image_upload import add_profile_pic
+from .forms import UpdateProfileForm,DriftForm
+from ..image_upload import add_profile_pic,add_drift_image
 # from ..request import get_quotes
 
 
@@ -25,11 +25,9 @@ def home():
     '''
     view root function that returns index page and its data
     '''
-    # posts=BlogPost.get_posts()
-    # qquote=get_quotes()
-    # quote=reloadapi()
-    # quote=get_quotes()
-    return render_template('home.html',title='Lets Drift')
+    drifts=DriftPost.get_posts()
+   
+    return render_template('home.html',title='Lets Drift',drifts=drifts)
 
 
 @main.route('/user/<uname>')
@@ -82,3 +80,27 @@ def profile_update(uname):
     #fetch the current profile image from the static folder and inject to the template    
     profile_image=url_for('static',filename='profile_pics/'+user.profile_image)  
     return render_template('profile/update_profile.html',form=form,profile_image=profile_image)  
+
+
+
+@main.route('/create_drift',methods=['GET','POST'])
+@login_required
+def create_drift():
+    '''
+    View Function to create a drift
+    '''
+    form=DriftForm()
+    if form.validate_on_submit():
+
+        if form.drift_image.data:
+            pic=add_drift_image(form.drift_image.data,form.location.data)
+            drift_img=pic
+            drift=DriftPost(location=form.location.data,date=form.date.data,location_about=form.location.data,price=form.price.data,drift_image=drift_img,user_id=current_user.id)  
+            
+            drift.save_post()
+
+        return redirect(url_for('main.home'))
+     
+    return render_template('admin/create_drift.html',form=form)    
+
+ 
