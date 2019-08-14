@@ -1,1 +1,27 @@
-{%extends 'base.html'%}
+
+{% extends 'base.html'%} {% block content %} {% for drift in drifts %}
+
+<article class="drift content-section">
+    <img src="{{url_for('static',filename='profile_pics/'+drift.author.profile_image)}}" class="rounded-circle post-img" alt="">
+  <div class="post-body">
+    <div class="post-data">
+      <a href="{{url_for('main.profile',uname=drift.author.username)}}"
+        >{{ drift.author.username }}</a
+      >
+      <img src="{{url_for('static',filename='images/'+drift.drift_image)}}" class="" alt="">
+      <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
+    </div>
+    <h2 class="post-title">
+      <a href="">{{
+        drift.location
+      }}</a>
+    </h2>
+    <p class="post-content">{{ drift.location_about}}</p>
+  </div>
+  <div class="post-footer">
+  
+
+  </div>
+</article>
+
+{% endfor %} {% endblock content %} 

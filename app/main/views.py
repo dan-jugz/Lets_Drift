@@ -25,11 +25,9 @@ def home():
     '''
     view root function that returns index page and its data
     '''
-    # posts=BlogPost.get_posts()
-    # qquote=get_quotes()
-    # quote=reloadapi()
-    # quote=get_quotes()
-    return render_template('home.html',title='Lets Drift')
+    drifts=DriftPost.get_posts()
+   
+    return render_template('home.html',title='Lets Drift',drifts=drifts)
 
 
 @main.route('/user/<uname>')
