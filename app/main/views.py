@@ -3,7 +3,7 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm,DriftForm
+from .forms import UpdateProfileForm,DriftForm,CommentForm
 from ..image_upload import add_profile_pic,add_drift_image
 # from ..request import get_quotes
 
@@ -173,23 +173,23 @@ def delete_drift(drift_id):
     return redirect(url_for('main.home'))
 
 
-# @main.route('/blog/comment/new/<int:drift_post_id>',methods=['GET','POST'])
-# @login_required
-# def new_comment(drift_post_id):
-#     '''
-#     View function that returns a form to create a comment post
-#     ''' 
-#     post=BlogPost.query.filter_by(id=drift_post_id)
-#     form=CommentForm()
+@main.route('/drift/comment/new/<int:drift_id>',methods=['GET','POST'])
+@login_required
+def new_comment(drift_id):
+    '''
+    View function that returns a form to create a comment 
+    ''' 
+    drift_post=DriftPost.query.filter_by(id=drift_id)
+    form=CommentForm()
 
-#     if form.validate_on_submit():
-#         comment_content=form.comment_content.data
-#         new_comment=Comment(comment_content=comment_content,post_id=drift_post_id,user_id=current_user.id)
+    if form.validate_on_submit():
+        comment_content=form.comment_content.data
+        new_comment=Comment(comment_content=comment_content,post_id=drift_id,user_id=current_user.id)
 
-#         new_comment.save_comment()
-#         return redirect(url_for('main.single_blogpost',drift_post_id=drift_post_id))
+        new_comment.save_comment()
+        return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
 
-#     return render_template('new_comment.html',title='New Comment',form=form)   
+    return render_template('new_comment.html',title=f'New {drift_post.location}Comment',form=form)   
   
 
  
