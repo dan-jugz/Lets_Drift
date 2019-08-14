@@ -71,7 +71,8 @@ class DriftPost(db.Model):
     drift_image=db.Column(db.String(100),default='default_image.png')
     location=db.Column(db.String(100))
     location_about=db.Column(db.Text)
-    
+    price=db.Column(db.Integer)
+        
     comments_post=db.relationship('Comment',backref='post_comments',lazy='dynamic')
 
     def save_post(self):
