@@ -1,9 +1,43 @@
-{% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
-
-{% block content %}
-   {{wtf.quick_form(comment_form)}}
-
-
-   {% if all_comments %}
-   <div class="row text-center"
+<div style>
+    {% extends 'base.html' %}
+    {% import 'bootstrap/wtf.html' as wtf %}
+    
+    {% block content %}
+    <div class="container" style="background-color: black;">
+        {{wtf.quick_form(comment_form)}}
+    
+            <!-- <div>
+                <h3>Comments for {{post.title}}</h3>
+            </div> -->
+        {% if all_comments %}
+        <div class="row text-center">
+                {% for comment in all_comments %}
+                    <div class="col-md-4">
+    <!-- Card -->
+    <div class="card card-image" style="background-image: url();">
+    
+      <!-- Content -->
+      <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+        <div>
+          <h3 class="card-title pt-2"><strong>{{ comment.comments}}</strong></h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,
+            optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos.
+            Odit sed qui, dolorum!.</p>
+                    <h5 class="pink-text">By: {{comment.user.username}}</h5>
+        </div>
+      </div>
+    
+    </div>
+            <hr>
+                        </div>
+                {% endfor %}
+            </div>
+                {% else %}
+    
+                <h3>No comments</h3>
+                {%endif%}
+    </div>
+    
+    
+    {% endblock %}
+</div>
