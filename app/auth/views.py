@@ -42,7 +42,7 @@ def register():
 
     
 @auth.route('/create_admin/<uname>',methods=['GET','POST'])
-def create_admin():
+def create_admin(uname):
     form=RegistrationForm()
     creator=User.query.filter_by(username=uname).first()
     if form.validate_on_submit():
@@ -50,7 +50,7 @@ def create_admin():
 
         user.save_user()
         flash('Admin Created','success')
-        return redirect(url_for('main.profile',uname=creator))
+        return redirect(url_for('main.profile',uname=creator.username))
 
     title='New Drift Account'
     return render_template('auth/register_admin.html',form=form,title=title) 
