@@ -4,3 +4,4 @@ migrations/
 start.sh
 config.py
 requirements.txt
+.vscode/
