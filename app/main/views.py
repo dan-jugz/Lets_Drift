@@ -4,7 +4,7 @@ from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
 from .forms import UpdateProfileForm,DriftForm
-from ..image_upload import add_profile_pic
+from ..image_upload import add_profile_pic,add_drift_image
 # from ..request import get_quotes
 
 
@@ -95,7 +95,7 @@ def create_drift():
     if form.validate_on_submit():
 
         if form.drift_image.data:
-            pic=add_drift_image(form.drift_image.data)
+            pic=add_drift_image(form.drift_image.data,form.location.data)
             drift_img=pic
 
         drift=DriftPost(location=form.location.data,date=form.date.data,location_about=form.location.data,price=form.price.data,drift_image=drift_img) 

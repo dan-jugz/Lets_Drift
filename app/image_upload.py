@@ -17,7 +17,26 @@ def add_profile_pic(pic_upload,username):
     # pic.resize(output_size,Image.ANTIALIAS)
     pic.thumbnail(output_size)
     pic.save(filepath)
-    
+
     return storage_filename
+
+
+def add_drift_image(pic_upload,location):
+
+    filename=pic_upload.filename #username.jpg
+   
+    ext_type=filename.split('.')[-1]  #username '.' 'jpg'
+ 
+    storage_filename=str(location)+'.'+ext_type #username.jpg
+
+    filepath=os.path.join(current_app.root_path,'static/images',storage_filename)
+
+    output_size=(720,480)
+    pic=Image.open(pic_upload)
+    # pic.resize(output_size,Image.ANTIALIAS)
+    pic.thumbnail(output_size)
+    pic.save(filepath)
+    
+    return storage_filename    
 
 
