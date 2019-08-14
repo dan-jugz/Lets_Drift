@@ -101,6 +101,15 @@ def create_drift():
 
         return redirect(url_for('main.home'))
      
-    return render_template('admin/create_drift.html',form=form)    
+    return render_template('admin/create_drift.html',form=form)   
+
+@main.route('/drift/<int:drift_id>')
+def single_driftpost(drift_id):
+    '''
+    View function to view one drift post
+    '''
+    drift_post=DriftPost.query.get_or_404(drift_id)
+    # comments=Comment.get_comments(blog_post_id)
+    return render_template('driftpost.html',title=drift_post.title,drift_post=drift_post)
 
  
