@@ -97,12 +97,12 @@ def create_drift():
         if form.drift_image.data:
             pic=add_drift_image(form.drift_image.data,form.location.data)
             drift_img=pic
+            drift=DriftPost(location=form.location.data,date=form.date.data,location_about=form.location.data,price=form.price.data,drift_image=drift_img,user_id=current_user.id)  
+            
+            drift.save_post()
 
-        drift=DriftPost(location=form.location.data,date=form.date.data,location_about=form.location.data,price=form.price.data,drift_image=drift_img) 
-
-        drift.save_post()
         return redirect(url_for('main.home'))
-
+     
     return render_template('admin/create_drift.html',form=form)    
 
  

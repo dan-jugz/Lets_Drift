@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
       {{form.date.label(class='form-group')}}
-      {{form.date(class='form-control')}}
+      {{form.date(class='form-control date-picker')}}
     </div>
     <div class="form-group">
       {{form.location_about.label(class='form-group')}}
@@ -20,8 +20,12 @@
     </div>
     <div class="form-group">
      {{form.price.label(class='form-group')}}
-    {{form.price(class='form-control-file')}}
+    {{form.price(class='form-control-file',type='number')}}
     </div>
+    <div class="form-group">
+            {{form.drift_image.label(class='form-group')}}
+           {{form.drift_image(class='form-control-file')}}
+           </div>
     <div class="form-group">
       {{form.submit(class='btn btn-outline-primary')}}
     </div>

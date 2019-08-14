@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField,DateField,IntegerField
+from wtforms import StringField,TextAreaField,SubmitField,IntegerField
+from wtforms.fields.html5 import DateField
 
 #for the picture upload
 from flask_wtf.file import FileField,FileAllowed
@@ -26,7 +27,7 @@ class DriftForm(FlaskForm):
 
     location=StringField('Drift Location',validators=[DataRequired()])
     location_about=TextAreaField('About Drift',validators=[DataRequired()])
-    date=DateField('When',validators=[DataRequired()])
+    date=DateField('When',format='%Y-%m-%d')
     price=IntegerField('Price',validators=[DataRequired()])
     drift_image=FileField('Upload Drift Image',validators=[FileAllowed(['jpg','png','jpeg'])])
     submit=SubmitField('Submit Drift')
