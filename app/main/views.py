@@ -32,3 +32,16 @@ def home():
     return render_template('home.html',title='Lets Drift')
 
 
+@main.route('/user/<uname>')
+def profile(uname):
+    '''
+    view function to see a single user profile
+    '''
+    user=User.query.filter_by(username=uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template('profile/user_profile.html',user=user)   
+
+
