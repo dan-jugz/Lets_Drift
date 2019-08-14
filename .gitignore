@@ -3,3 +3,4 @@ migrations/
 *.pyc
 start.sh
 config.py
+requirements.txt
