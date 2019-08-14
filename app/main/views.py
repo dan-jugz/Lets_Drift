@@ -3,7 +3,7 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm
+from .forms import UpdateProfileForm,DriftForm
 from ..image_upload import add_profile_pic
 # from ..request import get_quotes
 
@@ -82,3 +82,27 @@ def profile_update(uname):
     #fetch the current profile image from the static folder and inject to the template    
     profile_image=url_for('static',filename='profile_pics/'+user.profile_image)  
     return render_template('profile/update_profile.html',form=form,profile_image=profile_image)  
+
+
+
+@main.route('/create_drift',methods=['GET','POST'])
+@login_required
+def create_drift():
+    '''
+    View Function to create a drift
+    '''
+    form=DriftForm()
+    if form.validate_on_submit():
+
+        if form.drift_image.data:
+            pic=add_drift_image(form.drift_image.data)
+            drift_img=pic
+
+        drift=DriftPost(location=form.location.data,date=form.date.data,location_about=form.location.data,price=form.price.data,drift_image=drift_img) 
+
+        drift.save_post()
+        return redirect(url_for('main.home'))
+
+    return render_template('admin/create_drift.html',form=form)    
+
+ 

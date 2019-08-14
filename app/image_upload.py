@@ -17,7 +17,7 @@ def add_profile_pic(pic_upload,username):
     # pic.resize(output_size,Image.ANTIALIAS)
     pic.thumbnail(output_size)
     pic.save(filepath)
+    
     return storage_filename
 
 
-    
