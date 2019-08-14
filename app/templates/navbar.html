@@ -10,12 +10,11 @@
             <a class="navbar-brand" style="color: rgb(0, 117, 0);" href="/"> Home </a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="/" style="color: rgb(0, 117, 0);">Register</a></li>
-            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
-                <li><a href="{{url_for('main.profile',uname=current_user.username)}}" style="color: rgb(0, 117, 0);">Create drift</a></li>
+                <li><a href="{{url_for('auth.register')}}" style="color: rgb(0, 117, 0);">Rgister</a></li>
+                {% else %}
+                <li style="color: rgb(0, 117, 0);">Create drift</a></li>
                 <li><a href="{{url_for('auth.logout')}}" style="color: rgb(0, 117, 0);">Sign out</a></li>
                 {% else %}
                 <li><a href="{{url_for('auth.login')}}" style="color: rgb(0, 117, 0);">Sign in</a></li>
