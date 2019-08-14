@@ -62,7 +62,7 @@ def profile_update(uname):
 
     if form.validate_on_submit():
         
-        if form.pictures.data:
+        if form.picture.data:
             pic=add_profile_pic(form.picture.data,user.username)
             current_user.profile_image=pic
         user.username=form.username.data
@@ -81,4 +81,4 @@ def profile_update(uname):
     
     #fetch the current profile image from the static folder and inject to the template    
     profile_image=url_for('static',filename='profile_pics/'+user.profile_image)  
-    return render_template('profile/update_profile.html',form=form)  
+    return render_template('profile/update_profile.html',form=form,profile_image=profile_image)  

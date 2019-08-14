@@ -5,7 +5,7 @@
     <div class="card card-body">
         <h1 class="post-title"><a href="">{{user.username}}</a></h1>
         {% if user.profile_image%}
-        <img src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}" class="post-img" alt="">
+        <img src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}" class="post-img" alt="" class="img-responsive">
         {% else%}
         <p>No profile pic</p>
         {%endif%}
