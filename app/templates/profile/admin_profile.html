@@ -6,7 +6,7 @@
         <!-- displaying  Username-->
             <div class="col-md-7">
                 <!--Display  admin profile photo-->
-                {% if user.profile_pic_path %}
+                {% if admin.profile_pic_path %}
                     <img src="/home/moringa/Videos/Lets_Drift/app/static/images/admin.png" alt="" height="70px" width="100px" w class="img-thumbnail">
                 {%else%}
                     <p>No profile picture</p>
@@ -20,6 +20,11 @@
                 {%else%}
                 <p> {{admin.username| capitalize}} will be updated shortly.Stay close &#128540 </p>
                 {% endif %}
+            </div>
+            <!-- customized drifts -->
+            <div>
+                {% if %}
+
             </div>
         </div>
     </div>           
