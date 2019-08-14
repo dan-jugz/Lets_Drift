@@ -3,9 +3,9 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm,DriftForm
+from .forms import UpdateProfileForm,DriftForm,CommentForm
 from ..image_upload import add_profile_pic,add_drift_image
-# from ..request import get_quotes
+
 
 
 #views
@@ -109,8 +109,8 @@ def single_driftpost(drift_id):
     View function to view one drift post
     '''
     drift_post=DriftPost.query.get_or_404(drift_id)
-    # comments=Comment.get_comments(drift_post_id)
-    return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post)
+    comments=Comment.get_comments(drift_id)
+    return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post,comments=comments)
 
 
 @main.route('/post/<int:drift_id>/update',methods=['GET','POST'])
@@ -173,23 +173,42 @@ def delete_drift(drift_id):
     return redirect(url_for('main.home'))
 
 
-# @main.route('/blog/comment/new/<int:drift_post_id>',methods=['GET','POST'])
-# @login_required
-# def new_comment(drift_post_id):
-#     '''
-#     View function that returns a form to create a comment post
-#     ''' 
-#     post=BlogPost.query.filter_by(id=drift_post_id)
-#     form=CommentForm()
+@main.route('/drift/comment/new/<int:drift_id>',methods=['GET','POST'])
+@login_required
+def comment(drift_id):
+    '''
+    View function that returns a form to create a comment 
+    ''' 
+    drift_post=DriftPost.query.filter_by(id=drift_id).first()
+    form=CommentForm()
 
-#     if form.validate_on_submit():
-#         comment_content=form.comment_content.data
-#         new_comment=Comment(comment_content=comment_content,post_id=drift_post_id,user_id=current_user.id)
+    if form.validate_on_submit():
+        comment_content=form.comment_content.data
+        new_comment=Comment(comment_content=comment_content,post_id=drift_id,user_id=current_user.id)
 
-#         new_comment.save_comment()
-#         return redirect(url_for('main.single_blogpost',drift_post_id=drift_post_id))
+        new_comment.save_comment()
+        return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
 
-#     return render_template('new_comment.html',title='New Comment',form=form)   
+    title=f'New {drift_post.location}Comment'
+
+    return render_template('comment.html',title=title,form=form)   
+
+
+@main.route('/<int:drift_id>/comment/<int:comment_id>/delete',methods=['GET','POST'])
+@login_required
+def delete_comment(drift_id,comment_id):
+    '''
+    View function to delete a comment
+    '''
+    comment=Comment.query.filter_by(id=comment_id).first()
+    drift_post=DriftPost.query.get_or_404(drift_id)
+    if drift_post.author != current_user:
+        abort(403)
+        
+    db.session.delete(comment)
+    db.session.commit()
+    
+    return redirect(url_for('main.single_driftpost',drift_id=drift_id))      
   
 
  

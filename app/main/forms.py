@@ -33,3 +33,11 @@ class DriftForm(FlaskForm):
     submit=SubmitField('Submit Drift')
 
 
+
+class CommentForm(FlaskForm):
+    '''
+    class to create a comment form
+    '''
+    comment_content=TextAreaField('Leave A Comment',validators=[DataRequired()])
+    submit=SubmitField('Submit')
+
