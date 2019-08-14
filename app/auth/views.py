@@ -5,9 +5,11 @@ from .forms import RegistrationForm,LoginForm
 from .. import db
 from flask_login import login_user,login_required,logout_user
 
+
 @auth.route('/login',methods=['GET','POST'])
 def login():
     form=LoginForm()
+    
 
     if form.validate_on_submit():
         user=User.query.filter_by(email=form.email.data).first()
@@ -28,7 +30,7 @@ def login():
 def register():
     form=RegistrationForm()
     if form.validate_on_submit():
-        user=User(email=form.email.data,username=form.username.data,phone_number=form.phone_number.data,password=form.password.data)
+        user=User(email=form.email.data,username=form.username.data,phone_number=form.phone_number.data,password=form.password.data,role_id=2)
 
         user.save_user()
         flash('Thanks for registering')
@@ -36,6 +38,22 @@ def register():
 
     title='New Drift Account'
     return render_template('auth/register.html',form=form,title=title)    
+
+
+    
+@auth.route('/create_admin/<uname>',methods=['GET','POST'])
+def create_admin(uname):
+    form=RegistrationForm()
+    creator=User.query.filter_by(username=uname).first()
+    if form.validate_on_submit():
+        user=User(email=form.email.data,username=form.username.data,phone_number=form.phone_number.data,password=form.password.data,role_id=1)
+
+        user.save_user()
+        flash('Admin Created','success')
+        return redirect(url_for('main.profile',uname=creator.username))
+
+    title='New Drift Account'
+    return render_template('auth/register_admin.html',form=form,title=title) 
 
 @auth.route('/logout')
 @login_required
