@@ -10,13 +10,16 @@
 <style>
 .cover-main {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('app/static/images/forest.jpg') right bottom no-repeat;
+        url(..static/images/forest.jpg) right bottom no-repeat;
     background-size: cover;
     height: 95vh;
     }
 </style>
     <section class="cover-main" id="home">
             <div class="wrapper">
+                <a href="{{url_for('main.home')}}"class="btn btn-outline-primary">
+                    Get started today
+                </a>
                    
         </div>
     </section>
