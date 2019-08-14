@@ -3,8 +3,8 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
-# from .forms import UpdateProfileForm,CommentForm,PostForm
-# from ..picture_handler import add_profile_pic
+from .forms import UpdateProfileForm
+from ..image_upload import add_profile_pic
 # from ..request import get_quotes
 
 
