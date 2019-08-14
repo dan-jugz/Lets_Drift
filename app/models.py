@@ -100,7 +100,7 @@ class DriftPost(db.Model):
         return posts_user   
 
     def __repr__(self):
-        return f'PostID:{self.id}--Date{self.date}--Title{self.title}'    
+        return f'PostID:{self.id}--Date{self.date}--Title{self.location}'    
 
 
 class Comment(db.Model):
