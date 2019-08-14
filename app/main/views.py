@@ -109,7 +109,80 @@ def single_driftpost(drift_id):
     View function to view one drift post
     '''
     drift_post=DriftPost.query.get_or_404(drift_id)
-    # comments=Comment.get_comments(blog_post_id)
+    # comments=Comment.get_comments(drift_post_id)
     return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post)
+
+
+@main.route('/post/<int:drift_id>/update',methods=['GET','POST'])
+@login_required
+def update_drift(drift_id):
+    '''
+    View function to update a drift
+    '''
+    drift_post=DriftPost.query.get_or_404(drift_id)
+
+    if drift_post.author !=current_user:
+        #if the viewer is not the owner of the post
+        #dont allow
+        abort(403)
+    
+    form=DriftForm()
+    if form.validate_on_submit():
+        drift_post.location=form.location.data
+        drift_post.price=form.price.data
+        drift_post.date=form.date.data
+        drift_post.location_about=form.location_about.data
+
+
+        db.session.commit()
+        flash('Drift Updated','success')
+        return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
+
+    elif request.method=='GET':
+
+        #fill the form with the post details if user has not editted 
+        form.location.data=drift_post.location
+        form.price.data=drift_post.price
+        form.date.data=drift_post.date
+        form.location_about.data=drift_post.location_about
+
+    return render_template('admin/create_drift.html',title="Update Drift",form=form)     
+
+
+# @main.route('/post/<int:drift_post_id>/delete',methods=['GET','POST'])
+# @login_required
+# def delete_post(drift_post_id):
+#     '''
+#     View function to delete a post
+#     '''
+#     drift_post=BlogPost.query.get_or_404(drift_post_id)
+#     if drift_post.author != current_user:
+#         abort(403)
+        
+#     db.session.delete(drift_post)
+#     db.session.commit()
+#     flash('Blog Deleted')
+    
+#     return redirect(url_for('main.index'))
+
+
+# @main.route('/blog/comment/new/<int:drift_post_id>',methods=['GET','POST'])
+# @login_required
+# def new_comment(drift_post_id):
+#     '''
+#     View function that returns a form to create a comment post
+#     ''' 
+#     post=BlogPost.query.filter_by(id=drift_post_id)
+#     form=CommentForm()
+
+#     if form.validate_on_submit():
+#         comment_content=form.comment_content.data
+#         new_comment=Comment(comment_content=comment_content,post_id=drift_post_id,user_id=current_user.id)
+
+#         new_comment.save_comment()
+#         return redirect(url_for('main.single_blogpost',drift_post_id=drift_post_id))
+
+#     return render_template('new_comment.html',title='New Comment',form=form)   
+  
 
  
