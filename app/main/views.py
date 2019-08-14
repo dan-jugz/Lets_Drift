@@ -175,7 +175,7 @@ def delete_drift(drift_id):
 
 @main.route('/drift/comment/new/<int:drift_id>',methods=['GET','POST'])
 @login_required
-def new_comment(drift_id):
+def comment(drift_id):
     '''
     View function that returns a form to create a comment 
     ''' 
@@ -189,7 +189,7 @@ def new_comment(drift_id):
         new_comment.save_comment()
         return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
 
-    return render_template('new_comment.html',title=f'New {drift_post.location}Comment',form=form)   
+    return render_template('comment.html',title=f'New {drift_post.location}Comment',form=form)   
   
 
  
