@@ -28,7 +28,7 @@
             
                 {% if  current_user.role_id==1%}
                 <li class="nav-item">
-                    <a class="nav-link" href="">Create Drift</a>
+                    <a class="nav-link" href="{{url_for('main.create_drift')}}">Create Drift</a>
                 </li>
                 
                 {% endif %}
