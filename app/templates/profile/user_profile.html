@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+    <div class="card card-body">
+        <h1 class="post-title"><a href="">{{user.username}}</a></h1>
+        {% if user.profile_image%}
+        <img src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}" class="post-img" alt="" class="img-responsive">
+        {% else%}
+        <p>No profile pic</p>
+        {%endif%}
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">{{user.email}}</li>
+            </ul>
+        </div>
+        {% if user==current_user%}
+        
+        <div class="card-footer">
+        <a href="{{url_for('main.profile_update',uname=user.username)}}" class="btn btn-outline-primary">Update Profile</a>
+
+       {% if user.role_id==1 %}
+       <a href="{{url_for('auth.create_admin',uname=user.username)}}" class="btn btn-outline-primary">Create Admin</a>
+       {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock content %}

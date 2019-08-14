@@ -11,7 +11,7 @@ class RegistrationForm(FlaskForm):
     phone_number=TelField('Phone Number',validators=[DataRequired()])
     password=PasswordField('Password',validators=[DataRequired(),EqualTo('pass_confirm',message='Password must match')])
     pass_confirm=PasswordField('Confirm Password',validators=[DataRequired()])
-    submit=SubmitField('Sign Up')
+    submit=SubmitField('Create Account')
 
     def validate_email(self,field):
         if User.query.filter_by(email=field.data).first():

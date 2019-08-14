@@ -23,12 +23,15 @@
           <ul class="navbar-nav ml-auto">
             {% if current_user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="">{{current_user.username}}</a>
+              <a class="nav-link" href="{{url_for('main.profile',uname=current_user.username)}}">{{current_user.username}}</a>
             </li>
             
-            <li class="nav-item">
-              <a class="nav-link" href="">Create Post</a>
-            </li>
+                {% if  current_user.role_id==1%}
+                <li class="nav-item">
+                    <a class="nav-link" href="">Create Drift</a>
+                </li>
+                
+                {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{{url_for('auth.logout')}}">Sign Out</a>
               </li>

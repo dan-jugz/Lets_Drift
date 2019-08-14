@@ -1,0 +1,37 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+ {% block content %}
+<div class="jumbotron">
+  <div>
+    <h1 class="post-title"><a href="">Welcome {{ current_user.username }} to profile update</a> </h1>
+    <img
+      src="{{profile_image}}"
+      alt="" class="post-img rounded-circle"
+    />
+  </div>
+</div>
+
+<div class="update-form">
+    <!-- {{wtf.quick_form(form)}} -->
+  <form method='POST' action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+      {{form.username.label(class='form-group')}}
+      {{form.username(class='form-control')}}
+    </div>
+    <div class="form-group">
+      {{form.email.label(class='form-group')}}
+      {{form.email(class='form-control')}}
+    </div>
+    <div class="form-group">
+      {{form.picture.label(class='form-group')}}
+      {{form.picture(class='form-control-file')}}
+    </div>
+    <div class="form-group">
+      {{form.submit(class='btn btn-outline-primary')}}
+    </div>
+  </form>
+
+</div>
+
+{% endblock content %}
