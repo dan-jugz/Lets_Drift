@@ -128,13 +128,19 @@ def update_drift(drift_id):
     
     form=DriftForm()
     if form.validate_on_submit():
+
+        if form.drift_image.data:
+            pic=add_drift_image(form.drift_image.data,form.location.data)
+            drift_img=pic
+            drift_post.drift_image=drift_img
+
         drift_post.location=form.location.data
         drift_post.price=form.price.data
         drift_post.date=form.date.data
         drift_post.location_about=form.location_about.data
-
-
+            
         db.session.commit()
+
         flash('Drift Updated','success')
         return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
 
@@ -145,25 +151,26 @@ def update_drift(drift_id):
         form.price.data=drift_post.price
         form.date.data=drift_post.date
         form.location_about.data=drift_post.location_about
+   
 
     return render_template('admin/create_drift.html',title="Update Drift",form=form)     
 
 
-# @main.route('/post/<int:drift_post_id>/delete',methods=['GET','POST'])
-# @login_required
-# def delete_post(drift_post_id):
-#     '''
-#     View function to delete a post
-#     '''
-#     drift_post=BlogPost.query.get_or_404(drift_post_id)
-#     if drift_post.author != current_user:
-#         abort(403)
+@main.route('/post/<int:drift_id>/delete',methods=['GET','POST'])
+@login_required
+def delete_drift(drift_id):
+    '''
+    View function to delete a drift post
+    '''
+    drift_post=DriftPost.query.get_or_404(drift_id)
+    if drift_post.author != current_user:
+        abort(403)
         
-#     db.session.delete(drift_post)
-#     db.session.commit()
-#     flash('Blog Deleted')
+    db.session.delete(drift_post)
+    db.session.commit()
+    flash('Drift Post Deleted Successfully','success')
     
-#     return redirect(url_for('main.index'))
+    return redirect(url_for('main.home'))
 
 
 # @main.route('/blog/comment/new/<int:drift_post_id>',methods=['GET','POST'])
