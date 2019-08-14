@@ -16,12 +16,13 @@
     .wrapper{
         width: 100%;
         height: 100vh;
-        background: url(../static/images/forest.jpg);
+        background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(../static/images/forest.jpg);
         background-position: center;
         background-size: cover;
         display:flex;
-        justify-content: center;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         font-size:2vw;
         color:#fff;
 
@@ -29,12 +30,23 @@
     }
 
     .btn{
-        
+     text-decoration: none;
+     padding: 10px 50px;
+     color: #fff;
+     border:2px solid #fff;
+     transition: .6s ease;
+
+    }
+
+    .btn:hover{
+        background-color:#fff;
+
     }
 </style>
     <section class="cover-main" id="home">
             <div class="wrapper">
-                <a href="{{url_for('main.home')}}"class="btn btn-outline-primary">
+                <h1>Last Adventure Agency You Will Ever Need</h1>
+                <a href="{{url_for('main.home')}}"class="btn">
                     Get started today
                 </a>
                    
