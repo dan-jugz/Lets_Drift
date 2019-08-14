@@ -1,0 +1,25 @@
+    {% extends 'base.html'%}
+    
+    {% block content %}
+    <div class="container">
+        <div class="row" style="border:2px solid #222;border-radius: 5px;box-shadow: 5px 10px #888888;margin-bottom: 10px;padding:10px;">
+        <!-- displaying  Username-->
+            <div class="col-md-7">
+                <!--Display  admin profile photo-->
+                {% if user.profile_pic_path %}
+                    <img src="/home/moringa/Videos/Lets_Drift/app/static/images/admin.png" alt="" height="70px" width="100px" w class="img-thumbnail">
+                {%else%}
+                    <p>No profile picture</p>
+                {% endif %}
+    
+                <h3> {{admin.username| capitalize}} </h3>
+    
+                <!--Displaying admin bio-->
+                {% if admin.bio %}
+                <p> {{admin.bio}}</p>
+                {%else%}
+                <p> {{admin.username| capitalize}} will be updated shortly.Stay close &#128540 </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>           
