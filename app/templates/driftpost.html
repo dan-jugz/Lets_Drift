@@ -1,0 +1,64 @@
+{%extends 'base.html'%} 
+
+{% block content%}
+    
+        <article class="post content-section">
+            <img src="{{url_for('static',filename='profile_pics/'+drift_post.author.profile_image)}}" class="rounded-circle post-img" alt="">
+          <div class="post-body">
+            <div class="post-data">
+              <a href="{{url_for('main.profile',uname=drift_post.author.username)}}"
+                >{{ drift_post.author.username }}</a
+              >
+              <img src="{{url_for('static',filename='images/'+drift_post.drift_image)}}" class="img-fluid" alt="">
+              <small class="text-muted">{{ drift_post.date.strftime("%Y-%m-%d") }}</small>
+            </div>
+            <h2 class="post-title">
+              <a href="#">{{
+                drift_post.location
+              }}</a>
+            </h2>
+            <p class="post-content">{{ drift_post.location_about }}</p>
+          </div>
+          <div class="post-footer">
+
+        {% if drift_post.author== current_user %}
+        <div>
+            <a class="btn btn-sm btn-primary" href="{{url_for('main.update_drift',drift_id=drift_post.id)}}">Update</a>
+            <button type="btn" class="btn btn-sm btn-danger"  data-toggle='modal' data-target='#delete_modal'>Delete</button>
+        </div>
+
+        <!-- modal -->
+        <div class="modal" tabindex="-1" role="dialog" id='delete_modal'>
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete Post?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                <form action="{{url_for('main.delete_drift',drift_id=drift_post.id)}}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+      
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- modal end -->
+        
+        {% endif %}
+
+          </div>
+
+        </article>
+
+ 
+{% endblock%}

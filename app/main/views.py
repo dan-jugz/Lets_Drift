@@ -110,6 +110,6 @@ def single_driftpost(drift_id):
     '''
     drift_post=DriftPost.query.get_or_404(drift_id)
     # comments=Comment.get_comments(blog_post_id)
-    return render_template('driftpost.html',title=drift_post.title,drift_post=drift_post)
+    return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post)
 
  
