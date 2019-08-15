@@ -1,31 +1,48 @@
 {% extends 'base.html'%}
-
+​
 {% block content %}
-
-    <div class="card card-body">
-        <h1 class="post-title"><a href="">{{user.username}}</a></h1>
-        {% if user.profile_image%}
-        <img src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}" class="post-img" alt="" class="img-responsive">
-        {% else%}
-        <p>No profile pic</p>
-        {%endif%}
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">{{user.email}}</li>
+​
+    <div class="card-container">
+        <span class="pro">{{user.role_id}}</span>
+        <img
+            class="round"
+            src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}"
+            alt="user"
+        />
+        <h3>{{user.username}}</h3>
+        <h6>{{user.email}}</h6>
+        <p>
+            User interface designer and <br />
+            front-end developer
+        </p>
+        <div class="buttons">
+          {% if user==current_user %}
+          <button class="primary">
+              <a href="{{url_for('main.profile_update',uname=user.username)}}">Update Profile</a>
+          </button>
+          {% if user.role_id==1 %}
+          <button class="primary ghost">
+              <a href="{{url_for('auth.create_admin',uname=user.username)}}">Create Admin</a>
+          </button>
+          
+          {% endif %}
+          
+          {% endif %}
+        </div>
+        <div class="skills">
+            <h6>Skills</h6>
+            <ul>
+                <li>UI / UX</li>
+                <li>Front End Development</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+                <li>Node</li>
             </ul>
         </div>
-        {% if user==current_user%}
-        
-        <div class="card-footer">
-        <a href="{{url_for('main.profile_update',uname=user.username)}}" class="btn btn-outline-primary">Update Profile</a>
-
-       {% if user.role_id==1 %}
-       <a href="{{url_for('auth.create_admin',uname=user.username)}}" class="btn btn-outline-primary">Create Admin</a>
-       {% endif %}
-        </div>
-        {% endif %}
-    </div>
-
+    </div> 
+​
 <!-- ========================display all drifts==================== -->
     {% if user.role_id==1 %}
     
@@ -38,7 +55,7 @@
       </div>
       <p class="post-title">Food:{{drift.food}}</p>
       <p class="post-title">Group:{{drift.group}}</p>
-
+​
       <p class="post-content">{{ drift.specifics }}</p>
     </div>
     <div class="post-footer">
@@ -48,7 +65,7 @@
       >
     </div>
     <!-- ======================delete modal============================== -->
-
+​
         <!-- modal -->
         <div class="modal" tabindex="-1" role="dialog" id='delete_modal'>
             <div class="modal-dialog" role="document">
@@ -78,7 +95,7 @@
     <!-- ==================================================================== -->
   </article> 
     {% endfor %}
-
+​
     <!-- ****************************** -->
         <!--pagination  -->
         <nav aria-label="Page navigation example">
@@ -107,9 +124,9 @@
         </nav>
         <!-- end pagination -->
     <!-- ******************************** -->
-
+​
     
     {% endif %}
     <!-- =========================end display all drifts====================================== -->
-
+​
 {% endblock content %}
