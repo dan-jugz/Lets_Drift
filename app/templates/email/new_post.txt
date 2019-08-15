@@ -1,0 +1,3 @@
+{{driftpost.location}}
+
+{{driftpost.details}}

@@ -4,7 +4,7 @@ from ..models import User
 from .forms import RegistrationForm,LoginForm
 from .. import db
 from flask_login import login_user,login_required,logout_user
-
+from ..email import mail_message
 
 @auth.route('/login',methods=['GET','POST'])
 def login():
@@ -34,6 +34,7 @@ def register():
 
         user.save_user()
         flash('Thanks for registering')
+        mail_message("Welcome to Lets Drift. ","email/welcome_user",user.email,user=user)
         return redirect(url_for('auth.login'))
 
     title='New Drift Account'

@@ -19,7 +19,7 @@
         <div class="card-footer">
         <a href="{{url_for('main.profile_update',uname=user.username)}}" class="btn btn-outline-primary">Update Profile</a>
 
-       {% if user.role_id==1 %}
+       {% if user.role_id==2 %}
        <a href="{{url_for('auth.create_admin',uname=user.username)}}" class="btn btn-outline-primary">Create Admin</a>
        {% endif %}
         </div>

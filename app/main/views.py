@@ -3,7 +3,7 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role,CustomDrift
-from .forms import UpdateProfileForm,DriftForm,CommentForm,CustomDriftForm
+from .forms import UpdateProfileForm,DriftForm,CommentForm,CustomDriftForm,SubscriberForm
 from ..image_upload import add_profile_pic,add_drift_image
 
 

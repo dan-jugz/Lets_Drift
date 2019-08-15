@@ -1,0 +1,5 @@
+ 
+Dear {{user.username}}
+Welcome to Lets Drift
+We have just seen you have signed up for our application and want to welcome you to the family. 
+Please enjoy the blog posts plus don't be afraid to comment.

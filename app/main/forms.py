@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,TextAreaField,SubmitField,IntegerField,SelectField
 from wtforms.fields.html5 import DateField
-
+from ..models import Subscriber
 #for the picture upload
 from flask_wtf.file import FileField,FileAllowed
 
@@ -52,3 +52,10 @@ class CustomDriftForm(FlaskForm):
     food=SelectField('Should we provide food?',choices=[('Yes','Yes'),('No','No')])
     submit=SubmitField('Submit Custom Drift')    
 
+class SubscriberForm(FlaskForm):
+    email = StringField("Email Address",validators=[Required(),Email()])
+    submit = SubmitField("Subscribe")
+
+    def validate_email(self,data_field):
+        if Subscriber.query.filter_by(email =data_field.data).first():
+            raise ValidationError("Account already subscribed with that email")
