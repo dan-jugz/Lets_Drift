@@ -32,18 +32,27 @@
     h1{
 
         animation:animate 2s 1;
+        
+        font-size: 2rem;
+        text-shadow: .1rem .1rem .5rem black;
+        padding-bottom: 1.6rem;
+        text-transform: uppercase;
+        
 
     }
 
-    .btn{
+    .btn-lg{
      text-decoration: none;
-     padding: 10px 50px;
      color: #fff;
      border:2px solid #fff;
      transition: .6s ease;
      animation:animate 2s 1;
      margin-top:10vh;
-
+     border-width: medium;
+     border-width: medium;
+     border-radius: 0;
+     padding: .6rem 1.3rem;
+     font-size: 1.1rem;
     }
 
     @keyframes animate{
@@ -64,12 +73,29 @@
     <section class="cover-main" id="home">
             <div class="wrapper">
                 <h1>Last Adventure Agency You Will Ever Need</h1>
-                <a href="{{url_for('main.home')}}"class="btn">
+                <a href="{{url_for('main.home')}}"class="btn btn-lg">
                     Get started today
                 </a>
                    
         </div>
     </section>
+
+
+    <!-- landing page -->
+		<div class="landing">
+			<div class="home-wrap">
+				<div class="home-inner">
+
+				</div>
+			</div>
+		</div>
+
+		<div class="caption text-center">
+			<h1>Sunday Brian</h1>
+			<h3>Web Designer--Apache Cordova Developer</h3>
+			<a href="#course" class="btn btn-outline-light btn-lg">Get Started</a>
+		</div>
+		<!-- end landing page -->
 
    
     
