@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Lets-Drift</title>
+    <link rel="icon" href="static/images/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <style>
@@ -40,6 +42,9 @@
         
 
     }
+    .fa{
+         animation:animate 2s 1;
+    }
 
     .btn-lg{
      text-decoration: none;
@@ -69,33 +74,34 @@
         color:#000;
 
     }
+    .fa:hover {
+        background-color:#fff;
+        color:#000;
+    }
 </style>
     <section class="cover-main" id="home">
             <div class="wrapper">
                 <h1>Last Adventure Agency You Will Ever Need</h1>
                 <a href="{{url_for('main.home')}}"class="btn btn-lg">
                     Get started today
-                </a>
+                </a><br>
+                <div class="social">
+                    <div class="col-md-4" style="animation:animate 2s 1;"><a href="https://twitter.com/lets_drift?lang=en" class="fa fa-twitter" style="font-size:46px"></a> @lets_drift</div><br>
+                    <div class="col-md-4" style="animation:animate 2s 1;" ><a href="https://www.instagram.com/lets_drift/" class="fa fa-instagram" style="font-size:46px"></a> lets_drift</div><br>
+                    <div class="col-md-4" style="animation:animate 2s 1;" ><a href="https://www.facebook.com/letsdriftke/" class="fa fa-facebook" style="font-size:46px"></a> Lets Drift</div>
+
+                </div>
+
+
+
+
+
                    
         </div>
+        
+
     </section>
 
-
-    <!-- landing page -->
-		<div class="landing">
-			<div class="home-wrap">
-				<div class="home-inner">
-
-				</div>
-			</div>
-		</div>
-
-		<div class="caption text-center">
-			<h1>Sunday Brian</h1>
-			<h3>Web Designer--Apache Cordova Developer</h3>
-			<a href="#course" class="btn btn-outline-light btn-lg">Get Started</a>
-		</div>
-		<!-- end landing page -->
 
    
     
