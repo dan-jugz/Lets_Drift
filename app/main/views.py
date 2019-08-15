@@ -3,9 +3,9 @@ from .. import db
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm,DriftForm
+from .forms import UpdateProfileForm,DriftForm,CommentForm
 from ..image_upload import add_profile_pic,add_drift_image
-# from ..request import get_quotes
+
 
 
 #views
@@ -101,6 +101,114 @@ def create_drift():
 
         return redirect(url_for('main.home'))
      
-    return render_template('admin/create_drift.html',form=form)    
+    return render_template('admin/create_drift.html',form=form)   
+
+@main.route('/drift/<int:drift_id>')
+def single_driftpost(drift_id):
+    '''
+    View function to view one drift post
+    '''
+    drift_post=DriftPost.query.get_or_404(drift_id)
+    comments=Comment.get_comments(drift_id)
+    return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post,comments=comments)
+
+
+@main.route('/post/<int:drift_id>/update',methods=['GET','POST'])
+@login_required
+def update_drift(drift_id):
+    '''
+    View function to update a drift
+    '''
+    drift_post=DriftPost.query.get_or_404(drift_id)
+
+    if drift_post.author !=current_user:
+        #if the viewer is not the owner of the post
+        #dont allow
+        abort(403)
+    
+    form=DriftForm()
+    if form.validate_on_submit():
+
+        if form.drift_image.data:
+            pic=add_drift_image(form.drift_image.data,form.location.data)
+            drift_img=pic
+            drift_post.drift_image=drift_img
+
+        drift_post.location=form.location.data
+        drift_post.price=form.price.data
+        drift_post.date=form.date.data
+        drift_post.location_about=form.location_about.data
+            
+        db.session.commit()
+
+        flash('Drift Updated','success')
+        return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
+
+    elif request.method=='GET':
+
+        #fill the form with the post details if user has not editted 
+        form.location.data=drift_post.location
+        form.price.data=drift_post.price
+        form.date.data=drift_post.date
+        form.location_about.data=drift_post.location_about
+   
+
+    return render_template('admin/create_drift.html',title="Update Drift",form=form)     
+
+
+@main.route('/post/<int:drift_id>/delete',methods=['GET','POST'])
+@login_required
+def delete_drift(drift_id):
+    '''
+    View function to delete a drift post
+    '''
+    drift_post=DriftPost.query.get_or_404(drift_id)
+    if drift_post.author != current_user:
+        abort(403)
+        
+    db.session.delete(drift_post)
+    db.session.commit()
+    flash('Drift Post Deleted Successfully','success')
+    
+    return redirect(url_for('main.home'))
+
+
+@main.route('/drift/comment/new/<int:drift_id>',methods=['GET','POST'])
+@login_required
+def comment(drift_id):
+    '''
+    View function that returns a form to create a comment 
+    ''' 
+    drift_post=DriftPost.query.filter_by(id=drift_id).first()
+    form=CommentForm()
+
+    if form.validate_on_submit():
+        comment_content=form.comment_content.data
+        new_comment=Comment(comment_content=comment_content,post_id=drift_id,user_id=current_user.id)
+
+        new_comment.save_comment()
+        return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
+
+    title=f'New {drift_post.location}Comment'
+
+    return render_template('comment.html',title=title,form=form)   
+
+
+@main.route('/<int:drift_id>/comment/<int:comment_id>/delete',methods=['GET','POST'])
+@login_required
+def delete_comment(drift_id,comment_id):
+    '''
+    View function to delete a comment
+    '''
+    comment=Comment.query.filter_by(id=comment_id).first()
+    drift_post=DriftPost.query.get_or_404(drift_id)
+    if drift_post.author != current_user:
+        abort(403)
+        
+    db.session.delete(comment)
+    db.session.commit()
+    
+    return redirect(url_for('main.single_driftpost',drift_id=drift_id))      
+  
 
  

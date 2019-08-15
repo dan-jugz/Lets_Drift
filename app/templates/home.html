@@ -12,7 +12,7 @@
       <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
     </div>
     <h2 class="post-title">
-      <a href="">{{
+      <a href="{{url_for('main.single_driftpost',drift_id=drift.id)}}">{{
         drift.location
       }}</a>
     </h2>
