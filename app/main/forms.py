@@ -53,7 +53,7 @@ class CustomDriftForm(FlaskForm):
     submit=SubmitField('Submit Custom Drift')    
 
 class SubscriberForm(FlaskForm):
-    email = StringField("Email Address",validators=[Required(),Email()])
+    email = StringField("Email Address",validators=[DataRequired(),Email()])
     submit = SubmitField("Subscribe")
 
     def validate_email(self,data_field):

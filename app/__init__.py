@@ -23,6 +23,7 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     bootstrap.init_app(app)
+    mail.init_app(app)
 
     #Registering the blueprints
     # registering the blueprint
