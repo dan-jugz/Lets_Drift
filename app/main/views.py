@@ -32,7 +32,7 @@ def home():
     if form.validate_on_submit():
 
         customdrift=CustomDrift(group=form.group.data,specifics=form.specifics.data,date=form.date.data,food=form.food.data,user_id=current_user.id)  
-        flash('Custom Drift Created Successfully','success')
+        flash('Custom Drift Created Successfully &#128515' ,'success')
         customdrift.save_drift()
         
   
@@ -182,7 +182,7 @@ def delete_drift(drift_id):
         
     db.session.delete(drift_post)
     db.session.commit()
-    flash('Drift Post Deleted Successfully','success')
+    flash('Drift Post Deleted Successfully &#128686; &#02713;','success')
     
     return redirect(url_for('main.home'))
 
