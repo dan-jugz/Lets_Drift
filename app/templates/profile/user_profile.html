@@ -26,4 +26,62 @@
         {% endif %}
     </div>
 
+<!-- ========================display all drifts==================== -->
+    {% if user.role_id==1 %}
+    
+    {% for drift in customdrifts.items  %}
+    <img src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}" class="rounded-circle post-img" alt="">
+    <div class="post-body">
+      <div class="post-data">
+      <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a>
+        <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
+      </div>
+      <p class="post-title">Food:{{drift.food}}</p>
+      <p class="post-title">Group:{{drift.group}}</p>
+
+      <p class="post-content">{{ drift.specifics }}</p>
+    </div>
+    <div class="post-footer">
+      <a
+        href=""
+        class="btn btn-danger btn-sm"
+        >Delete Custom Drift</a
+      >
+    </div>
+  </article> 
+    {% endfor %}
+
+    <!-- ****************************** -->
+        <!--pagination  -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <!-- creating the pages -->
+                {% for page_num in customdrifts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+                <!-- 
+                    if we are currently on the same page as the custom drift disabled the page_num
+                 -->
+                {% if customdrifts.page==page_num %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="{{url_for('main.profile',uname=user.username,page=page_num )}}">{{page_num}}</a>
+                </li>
+                {% else%}
+                <li class="page-item ">
+                        <a class="page-link" href="{{url_for('main.profile',uname=user.username,page=page_num )}}">{{page_num}}</a>
+                    </li>
+                
+                {% endif %}
+    
+                {% endfor %}
+                <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                 -->
+            </ul>
+        </nav>
+        <!-- end pagination -->
+    <!-- ******************************** -->
+
+    
+    {% endif %}
+    <!-- =========================end display all drifts====================================== -->
+
 {% endblock content %}

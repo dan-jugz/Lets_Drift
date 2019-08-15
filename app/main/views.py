@@ -2,8 +2,8 @@ from flask import render_template,redirect,url_for,abort,flash,request
 from .. import db
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm,DriftForm,CommentForm
+from ..models import User,DriftPost,Comment,Role,CustomDrift
+from .forms import UpdateProfileForm,DriftForm,CommentForm,CustomDriftForm
 from ..image_upload import add_profile_pic,add_drift_image
 
 
@@ -20,27 +20,41 @@ def index():
     # quote=get_quotes()
     return render_template('index.html',title='Lets Drift')
 
-@main.route('/home')
+@main.route('/home',methods=['GET','POST'])
 def home():
     '''
     view root function that returns index page and its data
     '''
-    drifts=DriftPost.get_posts()
-   
-    return render_template('home.html',title='Lets Drift',drifts=drifts)
 
+    form=CustomDriftForm()
+    drifts=DriftPost.get_posts()
+
+    if form.validate_on_submit():
+
+        customdrift=CustomDrift(group=form.group.data,specifics=form.specifics.data,date=form.date.data,food=form.food.data,user_id=current_user.id)  
+        flash('Custom Drift Created Successfully','success')
+        customdrift.save_drift()
+        
+  
+ 
+    return render_template('home.html',title='Lets Drift',drifts=drifts,form=form)
+    
 
 @main.route('/user/<uname>')
 def profile(uname):
     '''
     view function to see a single user profile
     '''
+    #cyccle thru the custom drifts using pages..i.e if there are more than 5 posts we dont display all in tha single page
+    page=request.args.get('page',1,type=int)
+
     user=User.query.filter_by(username=uname).first()
+    customdrifts=CustomDrift.get_custom_drifts(page)
 
     if user is None:
         abort(404)
 
-    return render_template('profile/user_profile.html',user=user)   
+    return render_template('profile/user_profile.html',user=user,customdrifts=customdrifts)   
 
     
 @main.route('/user/<uname>/profile_update',methods=['GET','POST'])
@@ -209,6 +223,7 @@ def delete_comment(drift_id,comment_id):
     db.session.commit()
     
     return redirect(url_for('main.single_driftpost',drift_id=drift_id))      
-  
+
+
 
  
