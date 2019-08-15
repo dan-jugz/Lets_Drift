@@ -157,7 +157,7 @@ class CustomDrift(db.Model):
         Function that fetches all custom drifts
         '''
 
-        customdrifts=CustomDrift.query.order_by(DriftPost.date.desc()).all()
+        customdrifts=CustomDrift.query.order_by(CustomDrift.date.desc()).all()
         return customdrifts
 
     @classmethod

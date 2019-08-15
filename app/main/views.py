@@ -46,11 +46,12 @@ def profile(uname):
     view function to see a single user profile
     '''
     user=User.query.filter_by(username=uname).first()
+    customdrifts=CustomDrift.get_custom_drifts()
 
     if user is None:
         abort(404)
 
-    return render_template('profile/user_profile.html',user=user)   
+    return render_template('profile/user_profile.html',user=user,customdrifts=customdrifts)   
 
     
 @main.route('/user/<uname>/profile_update',methods=['GET','POST'])
