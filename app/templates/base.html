@@ -15,8 +15,8 @@
       rel="stylesheet"
       href="{{url_for('static',filename='css/bootstrap.min.css')}}"
     />
-    <!--     
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link
       rel="stylesheet"
@@ -63,7 +63,9 @@
       {% endfor%} {% endif%} {% endwith%}
       <!-- end flash messages -->
 
-      {% block content %} {% endblock %}
+    
+        {% block content %} {% endblock %}
+    
     </div>
   </body>
 </html>
