@@ -32,7 +32,7 @@ def home():
     if form.validate_on_submit():
 
         customdrift=CustomDrift(group=form.group.data,specifics=form.specifics.data,date=form.date.data,food=form.food.data,user_id=current_user.id)  
-        flash('Custom Drift Created Successfully','success')
+        flash('Custom Drift Created Successfully &#128515' ,'success')
         customdrift.save_drift()
         
   
@@ -182,7 +182,7 @@ def delete_drift(drift_id):
         
     db.session.delete(drift_post)
     db.session.commit()
-    flash('Drift Post Deleted Successfully','success')
+    flash('Drift Post Deleted Successfully &#128686; &#02713;','success')
     
     return redirect(url_for('main.home'))
 
@@ -230,6 +230,21 @@ def about():
     view root function that returns about page and its data
     '''
     return render_template('about_us.html',title='Lets Drift')
+
+@main.route('/<uname>/<int:custom_drift_id>/delete',methods=['GET','POST'])
+@login_required
+def delete_custom_drift(uname,custom_drift_id):
+    '''
+    View function to delete a custom drift
+    '''
+    custom_drift=CustomDrift.query.get_or_404(custom_drift_id)
+        
+    custom_drift.delete_custom_drift(custom_drift_id)
+
+    flash('Custom Drift Deleted Successfully','success')
+    
+    return redirect(url_for('main.profile',uname=uname))
+
 
 
  
