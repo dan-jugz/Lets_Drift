@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+
 * {
     box-sizing: border-box;
     font-size: 16px;
@@ -14,7 +17,9 @@
   body{
     /* background-image: linear-gradient(to right,#034378,#2d4e68); */
     height:100vh;
-  }
+    background-color: #212121;
+}
+  
 
   a{
     text-decoration: none;
@@ -30,6 +35,7 @@
     margin-bottom: 32px;
     padding-bottom: 8px;
     background: rgba(0, 0, 0, .9) !important;
+    /* background: transparent !important; */
   }
   
   nav a.navbar-brand{
@@ -169,6 +175,127 @@
 	margin-top:22px;
 }
 
+.drift-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+  grid-gap:8px;
+
+}
+
+.drift-post-card {
+  background-color: #000000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6em;
+  max-width: 310px;
+  min-width: 250px;
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.drift-post-card * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.drift-post-card img {
+  max-width: 100%;
+  vertical-align: top;
+  position: relative;
+  opacity: 0.75;
+}
+
+.drift-post-card figcaption {
+  padding: 25px 20px 25px;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+.drift-post-card .date {
+  background-color: #fff;
+  color: #333;
+  font-size: 18px;
+  font-weight: 800;
+  min-height: 48px;
+  min-width: 48px;
+  padding: 10px 0;
+  position: absolute;
+  right: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  top: 0;
+}
+
+.drift-post-card .date span {
+  display: block;
+  line-height: 14px;
+}
+
+.drift-post-card .date .month {
+  font-size: 11px;
+}
+
+.drift-post-card h3,
+.drift-post-card p {
+  margin: 0;
+  padding: 0;
+}
+
+.drift-post-card h3 {
+  font-weight: 800;
+  letter-spacing: -0.4px;
+}
+
+.drift-post-card .hover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  background-color: rgba(236, 188, 46, 0.75);
+  display: flex;
+  font-size: 65px;
+  justify-content: center;
+  opacity: 0;
+}
+
+.drift-post-card a {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.drift-post-card:hover .hover,
+.drift-post-card.hover .hover {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+  opacity: 1;
+}
+
+.drift-post-card:hover figcaption,
+.drift-post-card.hover figcaption {
+  opacity: 0;
+}
+
+.drift-post-card:hover .date,
+.drift-post-card.hover .date {
+  -webkit-transform: translateY(-100%);
+  transform: translateY(-100%);
+}
+
+
+
 
   
   /* =============ennd home================================================= */
@@ -256,9 +383,11 @@
     text-align: center;
 }
 
-.card-container h3, .card-container h3>a{
+.card-container h3{
   text-transform: capitalize;
+  
 }
+
 
 .card-container .role {
   color: #231e39;

@@ -177,8 +177,6 @@ def delete_drift(drift_id):
     View function to delete a drift post
     '''
     drift_post=DriftPost.query.get_or_404(drift_id)
-    if drift_post.author != current_user:
-        abort(403)
         
     db.session.delete(drift_post)
     db.session.commit()

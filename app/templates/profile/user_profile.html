@@ -50,14 +50,14 @@
           src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}"
           alt=""
       />
-      <h3> <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a></h3>
+      <h3>{{drift.user.username}}</h3>
       
       <p>
          <br>
       </p>
       <div class="buttons">
         
-        <button class="primary call-btn">
+        <button class="primary ghost call-btn">
             <a href="tel:{{drift.user.phone_number}}"> <span class="fa fa-phone"></span>{{ drift.user.phone_number}}</a>
         </button>
           

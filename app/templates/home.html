@@ -1,68 +1,34 @@
 
-{% extends 'base.html'%} {% block content %} {% import 'bootstrap/wtf.html' as wtf%}{% for drift in drifts %}
+{% extends 'base.html'%} {% block content %} {% import 'bootstrap/wtf.html' as wtf%}
 
-<article class="drift content-section">
-    <img src="{{url_for('static',filename='profile_pics/'+drift.author.profile_image)}}" class="rounded-circle post-img" alt="">
-  <div class="post-body">
-    <div class="post-data">
-      <a href="{{url_for('main.profile',uname=drift.author.username)}}"
-        >{{ drift.author.username }}</a
-      >
-      <img src="{{url_for('static',filename='images/'+drift.drift_image)}}" class="" alt="">
-      <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
-    </div>
-    <h2 class="post-title">
-      <a href="{{url_for('main.single_driftpost',drift_id=drift.id)}}">{{
-        drift.location
-      }}</a>
-    </h2>
-    <p class="post-content">{{ drift.location_about}}</p>
-  </div>
-  <div class="post-footer">
-  
-
-  </div>
-</article>
+<div class="drift-row">
+{% for drift in drifts %}
 
 <!-- ============================Expressive Cards========================================== -->
 
-<div class="row-drift-card">
-<div class="expressive drift-card">
-    <div class="wrapper">
-      <div class="header">
-        <div class="date">
-          <span class="day">12</span>
-          <span class="month">Aug</span>
-          <span class="year">2016</span>
-        </div>
-        <ul class="menu-content">
-          <li>
-            <a href="#" class="fa fa-bookmark-o"></a>
-          </li>
-          <li><a href="#" class="fa fa-heart-o"><span>18</span></a></li>
-          <li><a href="#" class="fa fa-comment-o"><span>3</span></a></li>
-        </ul>
-      </div>
-      <div class="data">
-        <div class="content">
-          <span class="author">Jane Doe</span>
-          <h1 class="title"><a href="#">Stranger Things: The sound of the Upside Down</a></h1>
-          <p class="text">The antsy bingers of Netflix will eagerly anticipate the digital release of the Survive soundtrack, out today.</p>
-          <a href="#" class="button">Read more</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    <figure class="drift-post-card">
+        <img src="{{url_for('static',filename='images/'+drift.drift_image)}}" alt="" />
+        <div class="date"><span class="day">{{ drift.date.strftime("%d") }}</span><span class="month">{{ drift.date.strftime("%b") }}</span></div>
+        <figcaption>
+          <h3>{{
+              drift.location
+            }}</h3>
+          <p>{{ drift.location_about}}</p>
+        </figcaption>
+        <div class="hover"><i class="ion-android-open"></i></div>
+        <a href="{{url_for('main.single_driftpost',drift_id=drift.id)}}"></a>
+      </figure>
+  
 
+<!-- =============================expressive card end============================================= -->
+{% endfor %}
 </div>
-
 
 <a href="#" class="float" id="myBtn" data-toggle='modal' data-target='#create_drift_modal'>
     <i class="fa fa-plus my-float"></i>
     </a>
 
-   <!-- modal -->
+   <!--================== modal =================================================-->
    <div class="modal" tabindex="-1" role="dialog" id='create_drift_modal'>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -86,7 +52,7 @@
       </div>
     </div>
   </div>
-  <!-- modal end -->
+  <!-- ==============================modal end ===========================================-->
 
 
 
@@ -102,10 +68,9 @@
         </div>
       </div>
     </div> -->
-<!-- ======================preloader end========================================= -->
+    <!-- ======================preloader end========================================= -->
+    
+    
+    <!-- ====================================================================== -->
+     {% endblock content %} 
 
-
-<!-- ====================================================================== -->
-
-
-{% endfor %} {% endblock content %} 
