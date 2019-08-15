@@ -9,20 +9,20 @@
     --dark-grey: #222;
     --comment-grey:#6c757d;
   }
-  
-  /* .btn-primary {
-      color: #fff;
-      background-color:var(--dark);
-      border-color:var(--dark);
-  }
-  
-  .btn-secondary {
-      color: #fff;
-      background-color: var(--dark-grey);
-      border-color: var(--dark-grey)
-  } */
-  
 
+
+  body{
+    /* background-image: linear-gradient(to right,#034378,#2d4e68); */
+    height:100vh;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  h1{
+    font-weight:300;
+  }
   
   /* =============inavbar==================== */
   
