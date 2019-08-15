@@ -45,8 +45,11 @@ def profile(uname):
     '''
     view function to see a single user profile
     '''
+    #cyccle thru the custom drifts using pages..i.e if there are more than 5 posts we dont display all in tha single page
+    page=request.args.get('page',1,type=int)
+
     user=User.query.filter_by(username=uname).first()
-    customdrifts=CustomDrift.get_custom_drifts()
+    customdrifts=CustomDrift.get_custom_drifts(page)
 
     if user is None:
         abort(404)
