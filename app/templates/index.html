@@ -1,109 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Lets-Drift</title>
-    <link rel="icon" href="static/images/favicon-16x16.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-<style>
-    *{
+    <link rel="icon" href="static/images/favicon-16x16.png" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <style>
+      * {
         padding: 0;
         margin: 0;
-    }
+      }
 
-    .wrapper{
+      .wrapper {
         width: 100%;
         height: 100vh;
-        background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)), url(../static/images/forest.jpg);
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)),
+          url(../static/images/forest.jpg);
         background-position: center;
         background-size: cover;
-        display:flex;
+        display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-size:2vw;
-        color:#fff;
+        font-size: 2vw;
+        color: #fff;
+      }
 
 
+
+      .caption{
+          width: 100%;
+          max-width:100%;
+          text-align: center !important;
+      }
+
+      .img-div{
+          margin-bottom:6vh; 
+          transition: .6s;
+          transform: scale(0.9);
+      }
+
+      .img-div:hover{
+       
+        transform: scale(1.1);
     }
-
-    h1{
-
-        animation:animate 2s 1;
         
-        font-size: 2rem;
-        text-shadow: .1rem .1rem .5rem black;
+        .img-div img{
+            
+        animation: animate 2s 1;
+        width: 200px;
+        height: 200px;
+            
+      }
+
+
+      h1 {
+        animation: animate 2s 1;
+        font-size: 1.5rem;
+        text-shadow: .1rem .1rem .8rem black;
         padding-bottom: 1.6rem;
         text-transform: uppercase;
-        
+      }
+      .fa {
+        animation: animate 2s 1;
+      }
 
-    }
-    .fa{
-         animation:animate 2s 1;
-    }
+      .btn-lg {
+        text-decoration: none;
+        color: #fff;
+        border: 2px solid #fff;
+        transition: 0.6s ease;
+        animation: animate 2s 1;
+        margin-top: 10vh;
+        border-width: medium;
+        border-width: medium;
+        border-radius: 0;
+        padding: 0.6rem 1.3rem;
+        font-size: 1.1rem;
+      }
 
-    .btn-lg{
-     text-decoration: none;
-     color: #fff;
-     border:2px solid #fff;
-     transition: .6s ease;
-     animation:animate 2s 1;
-     margin-top:10vh;
-     border-width: medium;
-     border-width: medium;
-     border-radius: 0;
-     padding: .6rem 1.3rem;
-     font-size: 1.1rem;
-    }
-
-    @keyframes animate{
-        0%{
-            transform: scale(0);
+      @keyframes animate {
+        0% {
+          transform: scale(0);
         }
-        100%{
-            transform: scale(1);
+        100% {
+          transform: scale(1);
         }
-    }
+      }
 
-    .btn:hover{
-        background-color:#fff;
-        color:#000;
+      .btn:hover {
+        background-color: #fff;
+        color: #000;
+      }
 
-    }
-    .fa:hover {
-        background-color:#fff;
-        color:#000;
-    }
-</style>
-    <section class="cover-main" id="home">
-            <div class="wrapper">
-                <h1>Last Adventure Agency You Will Ever Need</h1>
-                <a href="{{url_for('main.home')}}"class="btn btn-lg">
-                    Get started today
-                </a><br>
-                <div class="social">
-                    <div class="col-md-4" style="animation:animate 2s 1;"><a href="https://twitter.com/lets_drift?lang=en" class="fa fa-twitter" style="font-size:46px"></a> @lets_drift</div><br>
-                    <div class="col-md-4" style="animation:animate 2s 1;" ><a href="https://www.instagram.com/lets_drift/" class="fa fa-instagram" style="font-size:46px"></a> lets_drift</div><br>
-                    <div class="col-md-4" style="animation:animate 2s 1;" ><a href="https://www.facebook.com/letsdriftke/" class="fa fa-facebook" style="font-size:46px"></a> Lets Drift</div>
-
-                </div>
-
-
-
-
-
-                   
-        </div>
-        
-
-    </section>
-
-
-   
+      .social {
+        margin-top: 2vh;
+      }
     
-</body>
+    .social a {
+        cursor: pointer;
+        padding: 0px 20px;
+        display: inline-block;
+        animation: animate 2s 1;
+        text-decoration: none;
+
+      }
+
+      i.fa {
+        font-size: 38px;
+        color: #951c49;
+        transform: scale(0.9);
+        transition: 0.3s;
+      }
+
+      i.fa:hover {
+       
+        color:rgba(0, 212, 255, 1);
+        transform: scale(1.2);
+      }
+    </style>
+    <section class="cover-main" id="home">
+      <div class="wrapper">
+
+
+          <div class="img-div">
+            <a href="{{url_for('main.home')}}">
+                <img src="../static/images/YaWLqXz4_400x400.jpg" class="rounded-circle  img-responsive" alt="lets drift image">
+            </a>
+          </div>
+
+          <div class="caption">
+              <h1>Last Adventure Agency <br> You Will Ever Need</h1>
+          </div>
+    
+        <div class="social">
+          <a href="https://twitter.com/lets_drift?lang=en" target="_blank">
+            <i class="fa fa-twitter"></i
+          ></a>
+          <a href="https://www.instagram.com/lets_drift/" target="_blank">
+            <i class="fa fa-instagram"></i
+          ></a>
+          <a
+            href="https://www.facebook.com/letsdriftke/"
+            target="_blank"
+       
+          >
+            <i class="fa fa-facebook"></i></a
+          >
+        </div>
+
+
+      </div>
+    </section>
+  </body>
 </html>
