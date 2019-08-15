@@ -2,8 +2,8 @@ from flask import render_template,redirect,url_for,abort,flash,request
 from .. import db
 from . import main
 from flask_login import login_required,current_user
-from ..models import User,DriftPost,Comment,Role
-from .forms import UpdateProfileForm,DriftForm,CommentForm
+from ..models import User,DriftPost,Comment,Role,CustomDrift
+from .forms import UpdateProfileForm,DriftForm,CommentForm,CustomDriftForm
 from ..image_upload import add_profile_pic,add_drift_image
 
 
@@ -18,6 +18,7 @@ def index():
     # qquote=get_quotes()
     # quote=reloadapi()
     # quote=get_quotes()
+    
     return render_template('index.html',title='Lets Drift')
 
 @main.route('/home')
@@ -209,6 +210,7 @@ def delete_comment(drift_id,comment_id):
     db.session.commit()
     
     return redirect(url_for('main.single_driftpost',drift_id=drift_id))      
-  
+
+
 
  

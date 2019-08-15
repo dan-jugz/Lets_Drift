@@ -144,7 +144,7 @@ class CustomDrift(db.Model):
     specifics=db.Column(db.Text)
     group=db.Column(db.String(32))
     
-    def save_post(self):
+    def save_drift(self):
         '''
         Function that saves a drift post
         '''
