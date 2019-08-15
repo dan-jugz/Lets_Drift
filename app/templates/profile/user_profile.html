@@ -26,10 +26,36 @@
         {% endif %}
     </div>
 
-
+<!-- ========================display all drifts==================== -->
     {% if user.role_id==1 %}
     
+    {% for drift in customdrifts  %}
+    <img src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}" class="rounded-circle post-img" alt="">
+    <div class="post-body">
+      <div class="post-data">
+      <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a>
+        <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
+      </div>
+      <p class="post-title">Food:{{drift.food}}</p>
+      <p class="post-title">Group:{{drift.group}}</p>
+
+      <p class="post-content">{{ drift.specifics }}</p>
+    </div>
+    <div class="post-footer">
+      <a
+        href=""
+        class="btn btn-danger btn-sm"
+        >Delete Custom Drift</a
+      >
+    </div>
+  </article>
+
+     
+    
+    {% endfor %}
+
     
     {% endif %}
+    <!-- =========================end display all drifts====================================== -->
 
 {% endblock content %}
