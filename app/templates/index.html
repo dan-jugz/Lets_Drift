@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Lets-Drift</title>
-    <link rel="icon" href="static/images/favicon-16x16.png" />
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <style>
+    <link rel="icon" href="static/images/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+<style>
       * {
         padding: 0;
         margin: 0;
@@ -101,7 +98,12 @@
         color: #000;
       }
 
-      .social {
+    
+    .fa:hover {
+        background-color:#fff;
+        color:#000;
+    }
+    .social {
         margin-top: 2vh;
       }
     
@@ -126,7 +128,23 @@
         color:rgba(0, 212, 255, 1);
         transform: scale(1.2);
       }
-    </style>
+
+
+
+</style>
+    <section class="cover-main" id="home">
+            <div class="wrapper">
+                <h1>Last Adventure Agency You Will Ever Need</h1>
+                <a href="{{url_for('main.home')}}"class="btn btn-lg">
+                    Get started today
+                </a><br>
+                <div class="social">
+                    <div class="col-md-4" style="animation:animate 2s 1;"><a href="https://twitter.com/lets_drift?lang=en" class="fa fa-twitter" style="font-size:46px"></a> @lets_drift</div><br>
+                    <div class="col-md-4" style="animation:animate 2s 1;" ><a href="https://www.instagram.com/lets_drift/" class="fa fa-instagram" style="font-size:46px"></a> lets_drift</div><br>
+                    <div class="col-md-4" style="animation:animate 2s 1;" ><a href="https://www.facebook.com/letsdriftke/" class="fa fa-facebook" style="font-size:46px"></a> Lets Drift</div>
+                
+
+                </div>
     <section class="cover-main" id="home">
       <div class="wrapper">
 

@@ -53,19 +53,23 @@
       </div>
     </div>
   </div>
-</div>
+</div><br>
+<p class="glow"><em> Wanna Plan your Own Custom drift? Hit the button below &#8617 </em></p><br>
+<button class="btn btn-success  " data-toggle='modal' data-target='#create_drift_modal' style="border-radius: 50%; animation: blinker 2s linear infinite;">Customize a drift</button>
 
-</div>
+
+</div><br><br>
+
+  <!-- <p ><em> Wanna Plan your Own Custom drift? Hit the button below &#8617 </em></p> -->
 
 
-<button class="btn btn-danger" data-toggle='modal' data-target='#create_drift_modal'>Create custom drift</button>
+<!-- <button class="btn btn-success" data-toggle='modal' data-target='#create_drift_modal' style="border-radius: 50%;">Customize a drift</button> -->
 
    <!-- modal -->
    <div class="modal" tabindex="-1" role="dialog" id='create_drift_modal'>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Create Custom Drift?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -74,12 +78,12 @@
           {% if current_user.is_authenticated %}
           {{wtf.quick_form(form)}}
           {%else%}
-          <p>Login to create a custom drift</p>
+          <p class="glow">Login to create a custom drift</p>
           {% endif %}
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
+          <button type="button" class="btn btn-danger " data-dismiss="modal" style="animation: blinker 0.6s linear infinite;">Close</button>       
         </div>
       </div>
     </div>

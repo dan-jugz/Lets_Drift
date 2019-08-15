@@ -15,13 +15,11 @@
       rel="stylesheet"
       href="{{url_for('static',filename='css/bootstrap.min.css')}}"
     />
-    <!--     
+    <link rel="stylesheet" href="">
+<!--         
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='css/drift.css')}}"
-    />
+
     <!-- <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/popper.js')}}"></script>
     <script src="{{url_for('static', filename='js/bootstrap.js')}}"></script> -->
@@ -49,6 +47,69 @@
     <script src="{{url_for('static', filename='js/drift.js')}}"></script>
   </head>
   <body>
+    <style>
+         .blink {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+ 
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+ 
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+/* glow */
+bod {
+  background-color: black;
+  font-family: cursive;
+}
+
+.glow  {
+  font-size: 20px;
+  color:rgb(42, 10, 71);
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+/* @-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #18271f, 0 0 40px #143b25, 0 0 50px #19443b, 0 0 60px #117249, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #18271f, 0 0 40px #143b25, 0 0 50px #19443b, 0 0 60px #117249, 0 0 70px #e60073;
+  }
+} */
+      
+      
+</style>
+    
     {% block navbar %} {% include 'navbar.html' %} {% endblock navbar %}
     <div class="container">
       <!-- setting up flash messages -->
