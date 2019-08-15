@@ -1,5 +1,5 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="{{url_for('main.home')}}">Lets Drift</a>
+        <a class="navbar-brand" href="{{url_for('main.index')}}">Lets Drift</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -15,8 +15,7 @@
           <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="nav-link" href="{{url_for('main.home')}}"
-                >Home <span class="sr-only">(current)</span></a
-              >
+                >Home <span class="sr-only">(current)</span></a>
             </li>
           </ul>
       
@@ -45,6 +44,10 @@
                   <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
                 </li>
               {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('main.about')}}"
+              >About us <span class="sr-only">(current)</span></a>
+              </li>
           </ul>
         </div>
       </nav>

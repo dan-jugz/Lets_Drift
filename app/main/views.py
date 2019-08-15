@@ -224,6 +224,27 @@ def delete_comment(drift_id,comment_id):
     
     return redirect(url_for('main.single_driftpost',drift_id=drift_id))      
 
+@main.route('/about')
+def about():
+    '''
+    view root function that returns about page and its data
+    '''
+    return render_template('about_us.html',title='Lets Drift')
+
+@main.route('/<uname>/<int:custom_drift_id>/delete',methods=['GET','POST'])
+@login_required
+def delete_custom_drift(uname,custom_drift_id):
+    '''
+    View function to delete a custom drift
+    '''
+    custom_drift=CustomDrift.query.get_or_404(custom_drift_id)
+        
+    custom_drift.delete_custom_drift(custom_drift_id)
+
+    flash('Custom Drift Deleted Successfully','success')
+    
+    return redirect(url_for('main.profile',uname=uname))
+
 
 
  
