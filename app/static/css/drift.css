@@ -156,13 +156,15 @@
   z-index:99;
   border:none;
   outline: none;
-	background-color:#0C9;
+	background-color:#03bfcb;
 	color:#FFF;
 	border-radius:50px;
 	text-align:center;
-	box-shadow: 2px 2px 3px #999;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
-
+.float:hover{
+  color: #1c1e21;
+}
 .my-float{
 	margin-top:22px;
 }
@@ -239,7 +241,7 @@
       align-items: center;
       justify-content: center;
       margin: 0;
-      margin-bottom: 25px;
+      margin-bottom: 35px;
   
   }
   .card-container {
@@ -252,6 +254,10 @@
     width: 350px;
     max-width: 100%;
     text-align: center;
+}
+
+.card-container h3, .card-container h3>a{
+  text-transform: capitalize;
 }
 
 .card-container .role {
@@ -334,9 +340,22 @@ button.primary.ghost:hover {
     
   display: grid;
   grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); 
-  grid-gap: 8px;
+  grid-gap: 10px;
+  margin-bottom: 25px;
 
 }
+
+
+.drifts-container article.drift.content-section {
+  
+}
+
+
+.call-btn > a {
+    font-size: 1.5em;
+
+}
+
   /* =============end profile page===================== */
   /* =============index===================== */
   /* =============index===================== */

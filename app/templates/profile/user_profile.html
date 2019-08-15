@@ -34,36 +34,50 @@
     </div> 
 
 </div>
-
+<hr>
+<h3 class="text-center">Custom Drifts</h3>
 <div class="drifts-container">
   <!-- ========================display all drifts==================== -->
   {% if user.role_id==1 %}
+
     
   {% for drift in customdrifts.items  %}
  
-    <article class="drift content-section">
-      <img src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}" class="rounded-circle post-img" alt="">
-    <div class="post-body">
-      <div class="post-data">
-         <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a>
-        <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
+  <div class="card-container">
+      <span class="role">{{drift.user.role_id}}</span>
+      <img
+          class="round img-fluid"
+          src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}"
+          alt=""
+      />
+      <h3> <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a></h3>
+      
+      <p>
+         <br>
+      </p>
+      <div class="buttons">
+        
+        <button class="primary call-btn">
+            <a href="tel:{{drift.user.phone_number}}"> <span class="fa fa-phone"></span>{{ drift.user.phone_number}}</a>
+        </button>
+          
       </div>
-      <h2 class="post-title">
-          <p class="post-title">Food:{{drift.food}}</p>
-          <p class="post-title">Group:{{drift.group}}</p>
     
-      </h2>
-      <p class="post-content">{{ drift.specifics }}</p>
-    </div>
-    <div class="post-footer">
-        <a
-        class="btn btn-danger btn-sm" data-target='#delete_modal' data-toggle='modal'
-        >Delete Custom Drift</a
-      >
-  
-    </div>
-  </article>
-  
+      <div class="skills">
+          <h6>Info</h6>
+          <ul>
+              <li>Food:{{drift.food}}</li>
+              <li>Group:{{drift.group}}</li>
+              <li>Date:{{ drift.date.strftime("%Y-%m-%d") }}</li>
+              <li>  <a
+                class="btn btn-danger btn-sm text-white" data-target='#delete_modal' data-toggle='modal'
+                > <i class="fa fa-times"></i></a
+              ></li>
+           
+          </ul>
+      </div>
+  </div> 
+
 
 
 
@@ -82,7 +96,7 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Delete Custom Drif?</h5>
+                  <h5 class="modal-title">Delete Custom Drift?</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
