@@ -18,18 +18,27 @@ def index():
     # qquote=get_quotes()
     # quote=reloadapi()
     # quote=get_quotes()
-    
     return render_template('index.html',title='Lets Drift')
 
-@main.route('/home')
+@main.route('/home',methods=['GET','POST'])
 def home():
     '''
     view root function that returns index page and its data
     '''
-    drifts=DriftPost.get_posts()
-   
-    return render_template('home.html',title='Lets Drift',drifts=drifts)
 
+    form=CustomDriftForm()
+    drifts=DriftPost.get_posts()
+
+    if form.validate_on_submit():
+
+        customdrift=CustomDrift(group=form.group.data,specifics=form.specifics.data,date=form.date.data,food=form.food.data,user_id=current_user.id)  
+        flash('Custom Drift Created Successfully','success')
+        customdrift.save_drift()
+        
+  
+ 
+    return render_template('home.html',title='Lets Drift',drifts=drifts,form=form)
+    
 
 @main.route('/user/<uname>')
 def profile(uname):
