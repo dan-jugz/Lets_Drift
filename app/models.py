@@ -33,6 +33,9 @@ class User(UserMixin,db.Model):
     #tying a user to a comment
     comments=db.relationship('Comment',backref='commenter',lazy="dynamic")
 
+    #tying a user to a custom drift
+    customdrifts=db.relationship('CustomDrift',backref='user',lazy='dynamic')
+
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -74,6 +77,7 @@ class DriftPost(db.Model):
     price=db.Column(db.Integer)
         
     comments_post=db.relationship('Comment',backref='post_comments',lazy='dynamic')
+    
 
     def save_post(self):
         '''
@@ -128,6 +132,44 @@ class Comment(db.Model):
         comments=Comment.query.filter_by(post_id=post_id).all()
         return comments
 
+
+class CustomDrift(db.Model):
+
+    __tablename__='customdrifts'
+
+    id=db.Column(db.Integer,primary_key=True)
+    user_id=db.Column(db.Integer,db.ForeignKey('users.id'))
+    date=db.Column(db.DateTime,default=datetime.utcnow)
+    food=db.Column(db.String())
+    specifics=db.Column(db.Text)
+    group=db.Column(db.String(32))
+    
+    def save_post(self):
+        '''
+        Function that saves a drift post
+        '''
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_custom_drifts(cls):
+        '''
+        Function that fetches all custom drifts
+        '''
+
+        customdrifts=CustomDrift.query.order_by(DriftPost.date.desc()).all()
+        return customdrifts
+
+    @classmethod
+    def delete_custom_drift(cls,custom_id):
+        '''
+        Function that fetches all custom drifts
+        '''
+
+        customdrift=CustomDrift.query.filter_by(id=custom_id).first()
+        db.session.delete(customdrift)
+        db.session.commit()
+   
 
 
 
