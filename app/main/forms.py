@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,TextAreaField,SubmitField,IntegerField
+from wtforms import StringField,TextAreaField,SubmitField,IntegerField,SelectField
 from wtforms.fields.html5 import DateField
 
 #for the picture upload
@@ -40,4 +40,15 @@ class CommentForm(FlaskForm):
     '''
     comment_content=TextAreaField('Leave A Comment',validators=[DataRequired()])
     submit=SubmitField('Submit')
+
+
+class CustomDriftForm(FlaskForm):
+    '''
+    Class to create a custom drift form 
+    '''
+    group=SelectField('Solo or Group',choices=[('',''),('solo','Solo'),('group','Group')])
+    specifics=TextAreaField('What you wish to experience',validators=[DataRequired()])
+    date=DateField('Day you wish to travel',format='%Y-%m-%d')
+    food=SelectField('Should we provide food?',choices=[('Yes','Yes'),('No','No')])
+    submit=SubmitField('Submit Custom Drift')    
 

@@ -1,5 +1,5 @@
 
-{% extends 'base.html'%} {% block content %} {% for drift in drifts %}
+{% extends 'base.html'%} {% block content %} {% import 'bootstrap/wtf.html' as wtf%}{% for drift in drifts %}
 
 <article class="drift content-section">
     <img src="{{url_for('static',filename='profile_pics/'+drift.author.profile_image)}}" class="rounded-circle post-img" alt="">
@@ -58,7 +58,33 @@
 </div>
 
 
+<button class="btn btn-danger" data-toggle='modal' data-target='#create_drift_modal'>Create custom drift</button>
 
+   <!-- modal -->
+   <div class="modal" tabindex="-1" role="dialog" id='create_drift_modal'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Custom Drift?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% if current_user.is_authenticated %}
+          {{wtf.quick_form(form)}}
+          {%else%}
+          <p>Login to create a custom drift</p>
+          {% endif %}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal end -->
 
 
 
