@@ -8,22 +8,70 @@
 </head>
 <body>
 <style>
-.cover-main {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url(..static/images/forest.jpg) right bottom no-repeat;
-    background-size: cover;
-    height: 95vh;
+    *{
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrapper{
+        width: 100%;
+        height: 100vh;
+        background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.8)), url(../static/images/forest.jpg);
+        background-position: center;
+        background-size: cover;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size:2vw;
+        color:#fff;
+
+
+    }
+
+    h1{
+
+        animation:animate 2s 1;
+
+    }
+
+    .btn{
+     text-decoration: none;
+     padding: 10px 50px;
+     color: #fff;
+     border:2px solid #fff;
+     transition: .6s ease;
+     animation:animate 2s 1;
+     margin-top:10vh;
+
+    }
+
+    @keyframes animate{
+        0%{
+            transform: scale(0);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+
+    .btn:hover{
+        background-color:#fff;
+        color:#000;
+
     }
 </style>
     <section class="cover-main" id="home">
             <div class="wrapper">
-                <a href="{{url_for('main.home')}}"class="btn btn-outline-primary">
+                <h1>Last Adventure Agency You Will Ever Need</h1>
+                <a href="{{url_for('main.home')}}"class="btn">
                     Get started today
                 </a>
                    
         </div>
     </section>
-    
+
+   
     
 </body>
 </html>
