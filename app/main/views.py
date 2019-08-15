@@ -224,6 +224,12 @@ def delete_comment(drift_id,comment_id):
     
     return redirect(url_for('main.single_driftpost',drift_id=drift_id))      
 
+@main.route('/about')
+def about():
+    '''
+    view root function that returns about page and its data
+    '''
+    return render_template('about_us.html',title='Lets Drift')
 
 
  
