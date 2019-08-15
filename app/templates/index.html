@@ -43,16 +43,25 @@
       }
 
       .img-div{
-          margin-bottom:5vh; 
+          margin-bottom:6vh; 
+          transition: .6s;
+          transform: scale(0.9);
       }
+
+      .img-div:hover{
+       
+        transform: scale(1.1);
+    }
         
         .img-div img{
             
-            animation: animate 2s 1;
-            width: 200px;
-            height: 200px;
+        animation: animate 2s 1;
+        width: 200px;
+        height: 200px;
             
       }
+
+
       h1 {
         animation: animate 2s 1;
         font-size: 1.5rem;
@@ -114,7 +123,7 @@
 
       i.fa:hover {
        
-        color: #00ff8c;
+        color:rgba(0, 212, 255, 1);
         transform: scale(1.2);
       }
     </style>
@@ -123,7 +132,9 @@
 
 
           <div class="img-div">
-             <img src="../static/images/YaWLqXz4_400x400.jpg" class="rounded-circle  img-responsive" alt="lets drift image">
+            <a href="{{url_for('main.home')}}">
+                <img src="../static/images/YaWLqXz4_400x400.jpg" class="rounded-circle  img-responsive" alt="lets drift image">
+            </a>
           </div>
 
           <div class="caption">
