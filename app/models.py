@@ -152,12 +152,12 @@ class CustomDrift(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_custom_drifts(cls):
+    def get_custom_drifts(cls,page):
         '''
         Function that fetches all custom drifts
         '''
 
-        customdrifts=CustomDrift.query.order_by(CustomDrift.date.desc()).all()
+        customdrifts=CustomDrift.query.order_by(CustomDrift.date.desc()).paginate(page=page,per_page=5)
         return customdrifts
 
     @classmethod
