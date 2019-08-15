@@ -235,10 +235,11 @@
 
   .profile-container{
     
-      /* display: flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0; */
+      margin: 0;
+      margin-bottom: 25px;
   
   }
   .card-container {
@@ -272,7 +273,10 @@
   width: 200px;
   height: 200px;
 }
-
+.buttons a{
+  text-decoration: none;
+  color: #fff;
+}
 button.primary {
   background-color: #03bfcb;
   border: 1px solid #03bfcb;
@@ -283,9 +287,25 @@ button.primary {
   padding: 10px 25px;
 }
 
+button.primary:hover{
+  background-color: transparent;
+
+}
+
+button.primary:hover a{
+  
+  color: white !important;
+}
+
 button.primary.ghost {
   background-color: transparent;
   color: #02899c;
+}
+
+
+button.primary.ghost:hover {
+  background-color: #03bfcb;;
+  color: #fff;
 }
 
 .skills {
@@ -308,6 +328,14 @@ button.primary.ghost {
   font-size: 12px;
   margin: 0 7px 7px 0;
   padding: 7px;
+}
+
+.drifts-container{
+    
+  display: grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); 
+  grid-gap: 8px;
+
 }
   /* =============end profile page===================== */
   /* =============index===================== */

@@ -1,9 +1,7 @@
 {% extends 'base.html'%}
 
 {% block content %}
-
 <div class="profile-container">
-
     <div class="card-container">
         <span class="role">{{user.role_id}}</span>
         <img
@@ -34,30 +32,49 @@
            
         </div>
     </div> 
-  
+
 </div>
 
-<!-- ========================display all drifts==================== -->
-    {% if user.role_id==1 %}
+<div class="drifts-container">
+  <!-- ========================display all drifts==================== -->
+  {% if user.role_id==1 %}
     
-    {% for drift in customdrifts.items  %}
-    <img src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}" class="rounded-circle post-img" alt="">
+  {% for drift in customdrifts.items  %}
+ 
+    <article class="drift content-section">
+      <img src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}" class="rounded-circle post-img" alt="">
     <div class="post-body">
       <div class="post-data">
-      <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a>
+         <a href="{{url_for('main.profile',uname=drift.user.username)}}">{{drift.user.username}}</a>
         <small class="text-muted">{{ drift.date.strftime("%Y-%m-%d") }}</small>
       </div>
-      <p class="post-title">Food:{{drift.food}}</p>
-      <p class="post-title">Group:{{drift.group}}</p>
-
+      <h2 class="post-title">
+          <p class="post-title">Food:{{drift.food}}</p>
+          <p class="post-title">Group:{{drift.group}}</p>
+    
+      </h2>
       <p class="post-content">{{ drift.specifics }}</p>
     </div>
     <div class="post-footer">
-      <a
+        <a
         class="btn btn-danger btn-sm" data-target='#delete_modal' data-toggle='modal'
         >Delete Custom Drift</a
       >
+  
     </div>
+  </article>
+  
+
+
+
+
+
+
+
+
+
+
+
     <!-- ======================delete modal============================== -->
 
         <!-- modal -->
@@ -87,8 +104,14 @@
           </div>
           <!-- modal end -->
     <!-- ==================================================================== -->
-  </article> 
+  
     {% endfor %}
+
+    
+      </div>  
+    <!-- ******************************** -->
+    {% endif %}
+    <!-- =========================end display all drifts====================================== -->
 
     <!-- ****************************** -->
         <!--pagination  -->
@@ -111,16 +134,9 @@
                 {% endif %}
     
                 {% endfor %}
-                <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                 -->
+            
             </ul>
         </nav>
         <!-- end pagination -->
-    <!-- ******************************** -->
-
-    
-    {% endif %}
-    <!-- =========================end display all drifts====================================== -->
 
 {% endblock content %}
