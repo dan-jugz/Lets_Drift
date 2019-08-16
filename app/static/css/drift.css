@@ -269,7 +269,7 @@ nav.navbar ul.navbar-nav li.nav-item > a.nav-link:hover::after {
 
 /* =============single drift post===================== */
 
-content-section {
+.content-section {
   background: #ffffff;
   padding: 10px 20px;
   border: 1px solid #dddddd;
@@ -313,11 +313,25 @@ article > .article-top {
   padding-right: 4px;
 }
 
+.admin-buttons{
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.admin-buttons a{
+  color:#fff !important;
+}
+
+
+
 .comment-options {
   border: 1px solid #ddd;
   padding: 6px;
   margin-bottom: 10px;
-  margin-top: -20px;
+  margin-top: 20px;
   border-radius: 0;
 }
 
