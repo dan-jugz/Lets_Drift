@@ -118,6 +118,7 @@ def create_drift():
     return render_template('admin/create_drift.html',form=form)   
 
 @main.route('/drift/<int:drift_id>',methods=['GET','POST'])
+@login_required
 def single_driftpost(drift_id):
     '''
     View function to view one drift post
@@ -226,9 +227,7 @@ def delete_comment(drift_id,comment_id):
     '''
     comment=Comment.query.filter_by(id=comment_id).first()
     drift_post=DriftPost.query.get_or_404(drift_id)
-    if drift_post.author != current_user:
-        abort(403)
-        
+   
     db.session.delete(comment)
     db.session.commit()
     
