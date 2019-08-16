@@ -117,14 +117,26 @@ def create_drift():
      
     return render_template('admin/create_drift.html',form=form)   
 
-@main.route('/drift/<int:drift_id>')
+@main.route('/drift/<int:drift_id>',methods=['GET','POST'])
 def single_driftpost(drift_id):
     '''
     View function to view one drift post
     '''
     drift_post=DriftPost.query.get_or_404(drift_id)
     comments=Comment.get_comments(drift_id)
-    return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post,comments=comments)
+
+    form=CommentForm()
+
+    if form.validate_on_submit():
+        comment_content=form.comment_content.data
+        new_comment=Comment(comment_content=comment_content,post_id=drift_id,user_id=current_user.id)
+
+        new_comment.save_comment()
+        return redirect(url_for('main.single_driftpost',drift_id=drift_post.id))
+
+
+
+    return render_template('driftpost.html',title=drift_post.location,drift_post=drift_post,comments=comments,form=form)
 
 
 @main.route('/post/<int:drift_id>/update',methods=['GET','POST'])
@@ -177,8 +189,6 @@ def delete_drift(drift_id):
     View function to delete a drift post
     '''
     drift_post=DriftPost.query.get_or_404(drift_id)
-    if drift_post.author != current_user:
-        abort(403)
         
     db.session.delete(drift_post)
     db.session.commit()
