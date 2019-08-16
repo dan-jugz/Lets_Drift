@@ -6,12 +6,48 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                
-                {{wtf.quick_form(form)}}
-                <p class="register"> Don't  have an account?  <a href="{{url_for('auth.register')}}">Sign up here &#128072</a></p>
+                    <!-- Default form login -->
+        <form class="text-center border border-light p-5" action="" method='POST'>
+            {{ form.hidden_tag() }}
+            
+            <p class="h4 mb-4">Sign in</p>
+            
+            <!-- Email -->
+            {{form.email.label(class='form-group')}}
+            {{form.email(class='form-control mb-4',type='email',placeholder='E-mail')}}
+            
+            <!-- Password -->
+            {{form.password.label(class='form-group')}}
+            {{form.password(class='form-control mb-4',type='password',placeholder='Password')}}
+            
+            <div class="d-flex justify-content-around">
+                <div>
+                    <!-- Remember me -->
+                    <div class="custom-control custom-checkbox">
+                        {{form.remember.label(class='custom-control-label')}}
+                        {{form.remember(class='custom-control-input',type='checkbox')}}
+                    </div>
+                </div>
 
+                <div>
+                        <!-- Forgot password -->
+                        <a href="">Forgot password?</a>
+                    </div>
             </div>
+            
+            <!-- Sign in button -->
+            {{form.submit(class='btn btn-outline-primary btn-block my-4')}}
+            
+            <!-- Register -->
+            <p class="register"> Don't  have an account?  <a href="{{url_for('auth.register')}}">Sign up here &#128072</a></p>
+            
+        </form>
+           
             <div class="col-md-2"></div>
         </div>
     </div>
-{% endblock%}
+    
+    
+
+    <!-- Default form login -->
+    {% endblock%}

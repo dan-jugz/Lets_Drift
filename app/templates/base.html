@@ -51,18 +51,24 @@
   <body>
     {% block navbar %} {% include 'navbar.html' %} {% endblock navbar %}
     <div class="container">
-      <!-- setting up flash messages -->
-      {% with messages = get_flashed_messages(with_categories=true)%} {% if
-      messages %} {% for category,message in messages%}
-      <div class="alert alert-{{ category }}">
-        <button type="button" class="close" data-dismiss="alert">
-          &times;
-        </button>
-        {{ message }}
-      </div>
-      {% endfor%} {% endif%} {% endwith%}
-      <!-- end flash messages -->
+     <div class="row">
+        <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <!-- setting up flash messages -->
+              {% with messages = get_flashed_messages(with_categories=true)%} {% if
+              messages %} {% for category,message in messages%}
+              <div class="alert alert-{{ category }}">
+                <button type="button" class="close" data-dismiss="alert">
+                  &times;
+                </button>
+                {{ message }}
+              </div>
+              {% endfor%} {% endif%} {% endwith%}
+              <!-- end flash messages -->
+            </div>
+      <div class="col-md-2"></div>
 
+     </div>
     
         {% block content %} {% endblock %}
     

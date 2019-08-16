@@ -13,11 +13,13 @@
           <h3>{{
               drift.location
             }}</h3>
-          <p>{{ drift.location_about}}</p>
+          <p><i class="fa fa-map-marker"></i>
+            {{ drift.location_about}}</p>
         </figcaption>
         <div class="hover"><i class="ion-android-open"></i></div>
         <a href="{{url_for('main.single_driftpost',drift_id=drift.id)}}"></a>
       </figure>
+
   
 
 <!-- =============================expressive card end============================================= -->
@@ -47,7 +49,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>       
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>       
         </div>
       </div>
     </div>
