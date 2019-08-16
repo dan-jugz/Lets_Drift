@@ -1,29 +1,149 @@
 {% extends 'base.html'%}
 
 {% block content %}
-
-    <div class="card card-body">
-        <h1 class="post-title"><a href="">{{user.username}}</a></h1>
-        {% if user.profile_image%}
-        <img src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}" class="post-img" alt="" class="img-responsive">
-        {% else%}
-        <p>No profile pic</p>
-        {%endif%}
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">{{user.email}}</li>
-            </ul>
+<div class="profile-container">
+    <div class="card-container">
+        <span class="role">{{user.role_id}}</span>
+        <img
+            class="round img-fluid"
+            src="{{url_for('static',filename='profile_pics/'+user.profile_image)}}"
+            alt="{{user.username}}picture"
+        />
+        <h3>{{user.username}}</h3>
+        <h6>{{user.email}}</h6>
+        <p>
+            <br>
+        </p>
+        <div class="buttons">
+          {% if user==current_user %}
+          <button class="primary">
+              <a href="{{url_for('main.profile_update',uname=user.username)}}">Update Profile</a>
+          </button>
+          {% if user.role_id==1 %}
+          <button class="primary ghost">
+              <a href="{{url_for('auth.create_admin',uname=user.username)}}">Create Admin</a>
+          </button>
+          
+          {% endif %}
+          
+          {% endif %}
         </div>
-        {% if user==current_user%}
+        <div class="skills">
+           
+        </div>
+    </div> 
+
+</div>
+{% if user.role_id==1 %}
+<hr>
+<h3 class="text-center">Custom Drifts</h3>
+
+{% endif %}
+<div class="drifts-container">
+  <!-- ========================display all drifts==================== -->
+  {% if user.role_id==1 %}
+
+    
+  {% for drift in customdrifts.items  %}
+ 
+  <div class="card-container">
+      <span class="role">{{drift.user.role_id}}</span>
+      <img
+          class="round img-fluid"
+          src="{{url_for('static',filename='profile_pics/'+drift.user.profile_image)}}"
+          alt=""
+      />
+      <h3>{{drift.user.username}}</h3>
+      
+      <p>
+         <br>
+      </p>
+      <div class="buttons">
         
-        <div class="card-footer">
-        <a href="{{url_for('main.profile_update',uname=user.username)}}" class="btn btn-outline-primary">Update Profile</a>
+        <button class="primary ghost call-btn">
+            <a href="tel:{{drift.user.phone_number}}"> <span class="fa fa-phone"></span>{{ drift.user.phone_number}}</a>
+        </button>
+          
+      </div>
+    
+      <div class="skills">
+          <h6>Info</h6>
+          <ul>
+              <li>Food:{{drift.food}}</li>
+              <li>Group:{{drift.group}}</li>
+              <li>Date:{{ drift.date.strftime("%Y-%m-%d") }}</li>
+              <li>  <a
+                class="btn btn-danger btn-sm text-white" data-target='#delete_modal' data-toggle='modal'
+                > <i class="fa fa-times"></i></a
+              ></li>
+           
+          </ul>
+      </div>
+  </div> 
 
-       {% if user.role_id==1 %}
-       <a href="{{url_for('auth.create_admin',uname=user.username)}}" class="btn btn-outline-primary">Create Admin</a>
-       {% endif %}
-        </div>
+
+    <!-- ======================delete modal============================== -->
+
+        <!-- modal -->
+        <div class="modal" tabindex="-1" role="dialog" id='delete_modal'>
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete Custom Drift?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+                  <form action="{{url_for('main.delete_custom_drift',custom_drift_id=drift.id,uname=current_user.username)}}">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+        
+                  </form>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- modal end -->
+    <!-- ==================================================================== -->
+  
+    {% endfor %}
+
+    
+      </div>  
+    <!-- ******************************** -->
+    <!-- =========================end display all drifts====================================== -->
+    {% endif %}
+    
+    
+    <!-- ****************************** -->
+    <!--pagination  -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <!-- creating the pages -->
+        {% for page_num in customdrifts.iter_pages(left_edge=1,right_edge=1,left_current=1,right_current=2) %}
+        <!-- 
+          if we are currently on the same page as the custom drift disabled the page_num
+        -->
+        {% if customdrifts.page==page_num %}
+        <li class="page-item disabled">
+          <a class="page-link" href="{{url_for('main.profile',uname=user.username,page=page_num )}}">{{page_num}}</a>
+        </li>
+        {% else%}
+        <li class="page-item ">
+          <a class="page-link" href="{{url_for('main.profile',uname=user.username,page=page_num )}}">{{page_num}}</a>
+        </li>
+        
         {% endif %}
-    </div>
-
+        
+        {% endfor %}
+        
+      </ul>
+    </nav>
+    <!-- end pagination -->
 {% endblock content %}

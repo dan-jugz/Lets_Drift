@@ -20,7 +20,7 @@ def login():
 
             return redirect(request.args.get('next') or url_for('main.home'))
 
-        flash('Invalid Username or Password')
+        flash('Invalid Username or Password','danger')
     
     title='Drift Login'
     return render_template('auth/login.html',form=form,title=title) 
@@ -33,7 +33,7 @@ def register():
         user=User(email=form.email.data,username=form.username.data,phone_number=form.phone_number.data,password=form.password.data,role_id=2)
 
         user.save_user()
-        flash('Thanks for registering')
+        flash('Thanks for registering','success')
         return redirect(url_for('auth.login'))
 
     title='New Drift Account'

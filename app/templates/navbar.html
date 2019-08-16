@@ -1,5 +1,7 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="{{url_for('main.home')}}">Lets Drift</a>
+<nav class="navbar  navbar-expand-lg navbar-light bg-primary">
+        <a class="navbar-brand" href="{{url_for('main.index')}}">
+          <img src="{{url_for('static',filename='images/YaWLqXz4_400x400.jpg')}}" class="rounded-circle" alt="logo" style="width:40px;">
+          </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -15,8 +17,7 @@
           <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="nav-link" href="{{url_for('main.home')}}"
-                >Home <span class="sr-only">(current)</span></a
-              >
+                >Home <span class="sr-only">(current)</span></a>
             </li>
           </ul>
       
@@ -28,7 +29,7 @@
             
                 {% if  current_user.role_id==1%}
                 <li class="nav-item">
-                    <a class="nav-link" href="">Create Drift</a>
+                    <a class="nav-link" href="{{url_for('main.create_drift')}}">Create Drift</a>
                 </li>
                 
                 {% endif %}
@@ -45,6 +46,10 @@
                   <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
                 </li>
               {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('main.about')}}"
+              >About us <span class="sr-only">(current)</span></a>
+              </li>
           </ul>
         </div>
       </nav>

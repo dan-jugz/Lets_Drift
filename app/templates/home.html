@@ -1,1 +1,78 @@
-{%extends 'base.html'%}
+
+{% extends 'base.html'%} {% block content %} {% import 'bootstrap/wtf.html' as wtf%}
+
+<div class="drift-row">
+{% for drift in drifts %}
+
+<!-- ============================Expressive Cards========================================== -->
+
+    <figure class="drift-post-card">
+        <img src="{{url_for('static',filename='images/'+drift.drift_image)}}" alt="" />
+        <div class="date"><span class="day">{{ drift.date.strftime("%d") }}</span><span class="month">{{ drift.date.strftime("%b") }}</span></div>
+        <figcaption>
+          <h3>{{
+              drift.location
+            }}</h3>
+          <p><i class="fa fa-map-marker"></i>
+            {{ drift.location_about}}</p>
+        </figcaption>
+        <div class="hover"><i class="ion-android-open"></i></div>
+        <a href="{{url_for('main.single_driftpost',drift_id=drift.id)}}"></a>
+      </figure>
+
+  
+
+<!-- =============================expressive card end============================================= -->
+{% endfor %}
+</div>
+
+<a href="#" class="float" id="myBtn" data-toggle='modal' data-target='#create_drift_modal'>
+    <i class="fa fa-plus my-float"></i>
+    </a>
+
+   <!--================== modal =================================================-->
+   <div class="modal" tabindex="-1" role="dialog" id='create_drift_modal'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create Custom Drift?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% if current_user.is_authenticated %}
+          {{wtf.quick_form(form)}}
+          {%else%}
+          <p>Login to create a custom drift</p>
+          {% endif %}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>       
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ==============================modal end ===========================================-->
+
+
+
+<!-- ====================preloader========================================= -->
+  <!-- <div id="preloader">
+      <div id="loader">
+        <div class="line-scale-pulse-out">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div> -->
+    <!-- ======================preloader end========================================= -->
+    
+    
+    <!-- ====================================================================== -->
+     {% endblock content %} 
+
